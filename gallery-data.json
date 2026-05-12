@@ -1,6 +1,13 @@
 {
   "items": [
     {
+      "title": "Puertatermopanel",
+      "category": "puertas",
+      "image": "./assets/trabajos/puertas/Puertatermopanel.jpeg",
+      "description": "Instalación de puertas PVC.",
+      "location": ""
+    },
+    {
       "title": "Ventana Concepcion",
       "category": "ventanas",
       "image": "./assets/trabajos/ventanas/Ventana_concepcion.jpeg",
