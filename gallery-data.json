@@ -1,6 +1,20 @@
 {
   "items": [
     {
+      "title": "Ventana Concepcion",
+      "category": "ventanas",
+      "image": "./assets/trabajos/ventanas/Ventana_concepcion.jpeg",
+      "description": "Instalación de ventanas PVC en Concepción.",
+      "location": "Concepción"
+    },
+    {
+      "title": "Ventana Santiago",
+      "category": "ventanas",
+      "image": "./assets/trabajos/ventanas/ventana_santiago.jpeg",
+      "description": "Instalación de ventanas PVC en Santiago.",
+      "location": "Santiago"
+    },
+    {
       "title": "Ventanas PVC interior",
       "category": "ventanas",
       "image": "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/4f4b2ab93158181304e7509fe92a55b05f551142.jpg",
