@@ -1,27 +1,6 @@
 {
   "items": [
     {
-      "title": "Puertatermopanel",
-      "category": "puertas",
-      "image": "./assets/trabajos/Puertatermopanel.jpeg",
-      "description": "Instalación de puertas PVC.",
-      "location": ""
-    },
-    {
-      "title": "Ventana Concepcion",
-      "category": "general",
-      "image": "./assets/trabajos/Ventana_concepcion.jpeg",
-      "description": "Trabajo realizado por TECNO HERMET en Concepción.",
-      "location": "Concepción"
-    },
-    {
-      "title": "Ventana Santiago",
-      "category": "general",
-      "image": "./assets/trabajos/ventana_santiago.jpeg",
-      "description": "Trabajo realizado por TECNO HERMET en Santiago.",
-      "location": "Santiago"
-    },
-    {
       "title": "Ventanas PVC interior",
       "category": "ventanas",
       "image": "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/4f4b2ab93158181304e7509fe92a55b05f551142.jpg",
