@@ -1,0 +1,32 @@
+{
+  "items": [
+    {
+      "title": "Ventanas PVC interior",
+      "category": "ventanas",
+      "image": "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/4f4b2ab93158181304e7509fe92a55b05f551142.jpg",
+      "description": "Proyecto residencial con ventanales de gran formato.",
+      "location": "Santiago"
+    },
+    {
+      "title": "Puerta PVC moderna",
+      "category": "puertas",
+      "image": "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/73245052e0bea4511a763f0f74c230e61eab04a3.jpg",
+      "description": "Puerta con panel vidriado y diseño contemporáneo.",
+      "location": "Las Condes"
+    },
+    {
+      "title": "Cortinas de cristal",
+      "category": "cortinas",
+      "image": "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/00b10446d7cbf17b9c453b8ccf016fa88be40c86.jpg",
+      "description": "Cierre de terraza con cortina transparente.",
+      "location": "Providencia"
+    }
+    {
+      "title": "Puerta Termopanel",
+      "category": "puertas",
+      "image": "C:\Users\Oscar\Downloads\TECNO_HERMET\assets\trabajos\Puertatermopanel.jpg",
+      "description": "Instalación de Puerta termopanel, casa residencial, con aislación térmica",
+      "location": "Concepcion, Bío-bio"
+    }
+  ]
+}

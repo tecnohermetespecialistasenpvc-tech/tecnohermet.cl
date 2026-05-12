@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TECNO HERMET | Subir trabajo</title>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Arial,sans-serif;background:#09121d;color:#e8f1fb;min-height:100vh;display:grid;place-items:center;padding:1.5rem}
+    .box{width:min(640px,100%);background:#101b29;padding:2rem;border-radius:1.2rem;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+    h1{font-size:1.3rem;margin-bottom:.4rem}
+    .muted{color:#a7b9ce;font-size:.88rem;margin-bottom:1.2rem}
+    .info{background:#1a2535;border:1px solid #22354f;border-radius:.8rem;padding:1rem;color:#a7b9ce;font-size:.83rem;margin-bottom:1.2rem;line-height:1.7}
+    code{background:#0f1b2d;padding:.15rem .35rem;border-radius:.3rem;color:#43d6ce;font-size:.82rem}
+    .field{display:grid;gap:.3rem;margin-bottom:.9rem}
+    label{font-size:.85rem;font-weight:600;color:#a7b9ce}
+    input,select,textarea{width:100%;padding:12px 14px;border-radius:10px;border:1px solid #22354f;background:#132235;color:#e8f1fb;font-family:inherit;font-size:.95rem}
+    textarea{min-height:90px;resize:vertical}
+    .btn{width:100%;padding:14px;border-radius:10px;border:0;background:linear-gradient(135deg,#005f8f,#00b1b8 52%,#ff8a3d);color:white;font-weight:700;font-size:1rem;cursor:pointer;margin-top:.4rem}
+    .preview{display:none;margin-top:1.2rem;padding:1.2rem;border-radius:1rem;background:#132235;border:1px solid #22354f}
+    .preview h2{font-size:.95rem;color:#a7b9ce;margin-bottom:.7rem}
+    pre{color:#43d6ce;font-size:.83rem;white-space:pre-wrap;word-break:break-word}
+    .copy-btn{margin-top:.8rem;width:100%;padding:11px;border-radius:10px;border:1px solid #22354f;background:none;color:#43d6ce;cursor:pointer;font-size:.9rem}
+    a.back{display:block;margin-top:1rem;text-align:center;color:#43d6ce;font-size:.88rem;text-decoration:none}
+  </style>
+</head>
+<body>
+<div class="box">
+  <h1>Subir nuevo trabajo</h1>
+  <p class="muted">Completa el formulario y copia el JSON en <code>gallery-data.json</code>.</p>
+  <div class="info">
+    <strong>Pasos:</strong><br>
+    1. Sube la foto a <code>assets/trabajos/</code> de tu proyecto.<br>
+    2. Escribe la ruta: <code>./assets/trabajos/mi-foto.jpg</code><br>
+    3. Haz clic en <strong>Generar JSON</strong>.<br>
+    4. Copia el bloque y pégalo dentro de <code>"items"</code> en <code>gallery-data.json</code>.<br>
+    5. Sube los cambios a GitHub.
+  </div>
+  <div class="field"><label>Título del trabajo</label><input id="titulo" type="text" placeholder="Ej: Ventanas PVC Las Condes"></div>
+  <div class="field">
+    <label>Categoría</label>
+    <select id="categoria">
+      <option value="ventanas">Ventanas</option>
+      <option value="puertas">Puertas</option>
+      <option value="termopanel">Termopanel</option>
+      <option value="cortinas">Cortinas de cristal</option>
+      <option value="instalacion">Instalación</option>
+    </select>
+  </div>
+  <div class="field"><label>Imagen (ruta o URL)</label><input id="imagen" type="text" placeholder="./assets/trabajos/mi-foto.jpg"></div>
+  <div class="field"><label>Descripción</label><textarea id="descripcion" placeholder="Describe el trabajo realizado."></textarea></div>
+  <div class="field"><label>Ubicación (opcional)</label><input id="ubicacion" type="text" placeholder="Las Condes, Santiago"></div>
+  <button class="btn" onclick="generar()">Generar JSON</button>
+  <div class="preview" id="preview">
+    <h2>Copia este bloque y pégalo en gallery-data.json dentro de "items":</h2>
+    <pre id="output"></pre>
+    <button class="copy-btn" onclick="copiar()">📋 Copiar al portapapeles</button>
+  </div>
+  <a class="back" href="index.html">← Volver al panel admin</a>
+</div>
+<script>
+function generar(){
+  const obj={
+    title:document.getElementById("titulo").value.trim(),
+    category:document.getElementById("categoria").value,
+    image:document.getElementById("imagen").value.trim(),
+    description:document.getElementById("descripcion").value.trim(),
+    location:document.getElementById("ubicacion").value.trim()
+  };
+  document.getElementById("output").textContent=JSON.stringify(obj,null,2);
+  document.getElementById("preview").style.display="block";
+}
+function copiar(){
+  navigator.clipboard.writeText(document.getElementById("output").textContent)
+    .then(()=>alert("¡JSON copiado al portapapeles!"));
+}
+</script>
+</body>
+</html>
