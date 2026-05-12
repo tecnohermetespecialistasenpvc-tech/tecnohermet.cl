@@ -199,7 +199,6 @@ UBICACIONES = {
 }
 
 # ── Funciones ─────────────────────────────────────────────
-
 def detectar_categoria(nombre):
     nombre_lower = nombre.lower()
     for clave, valor in CATEGORIAS.items():
@@ -233,7 +232,6 @@ def generar_descripcion(categoria, ubicacion):
     return f"{base}{' en ' + ubicacion if ubicacion else ''}."
 
 # ── Main ──────────────────────────────────────────────────
-
 def main():
     TRABAJOS_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -242,31 +240,28 @@ def main():
         if f.is_file() and f.suffix.lower() in EXTENSIONES
     ])
 
-    if archivos:
-        # Hay fotos reales → usa solo esas
-        items = []
-        for archivo in archivos:
-            categoria = detectar_categoria(archivo.name)
-            ubicacion = detectar_ubicacion(archivo.name)
-            item = {
-                "title":       limpiar_titulo(archivo.name),
-                "category":    categoria,
-                "image":       f"./assets/trabajos/{archivo.name}",
-                "description": generar_descripcion(categoria, ubicacion),
-                "location":    ubicacion,
-            }
-            items.append(item)
-            print(f"  ✓ {archivo.name} → {categoria} | {ubicacion or 'sin ubicación'}")
-        print(f"\n{len(items)} foto(s) real(es) cargada(s).")
-    else:
-        # Sin fotos reales → mantiene las demo
-        items = DEMO_ITEMS
-        print("Sin fotos reales en assets/trabajos/ → usando imágenes demo.")
+    # Fotos reales desde assets/trabajos/
+    items_reales = []
+    for archivo in archivos:
+        categoria = detectar_categoria(archivo.name)
+        ubicacion = detectar_ubicacion(archivo.name)
+        item = {
+            "title":       limpiar_titulo(archivo.name),
+            "category":    categoria,
+            "image":       f"./assets/trabajos/{archivo.name}",
+            "description": generar_descripcion(categoria, ubicacion),
+            "location":    ubicacion,
+        }
+        items_reales.append(item)
+        print(f"  ✓ {archivo.name} → {categoria} | {ubicacion or 'sin ubicación'}")
+
+    # Combina: reales primero, demo al final
+    items = items_reales + DEMO_ITEMS
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump({"items": items}, f, ensure_ascii=False, indent=2)
 
-    print(f"gallery-data.json actualizado con {len(items)} ítem(s).")
+    print(f"\ngallery-data.json → {len(items_reales)} real(es) + {len(DEMO_ITEMS)} demo = {len(items)} total.")
 
 if __name__ == "__main__":
     main()
