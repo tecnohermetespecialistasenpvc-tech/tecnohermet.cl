@@ -1,3 +1,71 @@
+import json
+from pathlib import Path
+
+TRABAJOS_DIR = Path("assets/trabajos")
+OUTPUT_FILE  = Path("gallery-data.json")
+EXTENSIONES  = {".jpg", ".jpeg", ".png", ".webp"}
+
+# ── Imágenes demo (se muestran cuando no hay fotos reales) ──
+DEMO_ITEMS = [
+    {
+        "title": "Ventanas PVC interior",
+        "category": "ventanas",
+        "image": "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/4f4b2ab93158181304e7509fe92a55b05f551142.jpg",
+        "description": "Proyecto residencial con ventanales de gran formato.",
+        "location": "Santiago"
+    },
+    {
+        "title": "Puerta PVC moderna",
+        "category": "puertas",
+        "image": "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/73245052e0bea4511a763f0f74c230e61eab04a3.jpg",
+        "description": "Puerta con panel vidriado y diseño contemporáneo.",
+        "location": "Las Condes"
+    },
+    {
+        "title": "Cortinas de cristal",
+        "category": "cortinas",
+        "image": "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/00b10446d7cbf17b9c453b8ccf016fa88be40c86.jpg",
+        "description": "Cierre de terraza con cortina transparente.",
+        "location": "Providencia"
+    },
+    {
+        "title": "Sala con termopanel",
+        "category": "termopanel",
+        "image": "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/1f4aed3c43bb1ce6f9f60c667ac588da07f52982.jpg",
+        "description": "Mayor confort térmico y acústico.",
+        "location": "Vitacura"
+    },
+    {
+        "title": "Terraza panorámica",
+        "category": "cortinas",
+        "image": "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/fafbdd837531111e5c3492552047700ce354f14f.jpg",
+        "description": "Solución panorámica en cristal para terraza.",
+        "location": "Ñuñoa"
+    },
+    {
+        "title": "Instalación técnica",
+        "category": "instalacion",
+        "image": "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/b6d7955aca42b445c45898e99ab68800660dd09f.jpg",
+        "description": "Montaje en obra con equipo especializado.",
+        "location": "Santiago"
+    }
+]
+
+# ── Diccionarios de detección ─────────────────────────────
+
+CATEGORIAS = {
+    "ventanas":    "ventanas",
+    "puerta":      "puertas",
+    "puertas":     "puertas",
+    "termopanel":  "termopanel",
+    "cortina":     "cortinas",
+    "cortinas":    "cortinas",
+    "baranda":     "cortinas",
+    "instalacion": "instalacion",
+    "montaje":     "instalacion",
+    "obra":        "instalacion",
+}
+
 UBICACIONES = {
     # ── Región Metropolitana ──────────────────────────────
     "lascondes":       "Las Condes",
@@ -129,3 +197,76 @@ UBICACIONES = {
     "tucapel_nuble":   "Tucapel",
     "elpinar":         "El Pinar",
 }
+
+# ── Funciones ─────────────────────────────────────────────
+
+def detectar_categoria(nombre):
+    nombre_lower = nombre.lower()
+    for clave, valor in CATEGORIAS.items():
+        if clave in nombre_lower:
+            return valor
+    return "general"
+
+def detectar_ubicacion(nombre):
+    nombre_lower = nombre.lower().replace("-", "").replace("_", "")
+    for clave, valor in UBICACIONES.items():
+        if clave.replace("_", "") in nombre_lower:
+            return valor
+    return ""
+
+def limpiar_titulo(nombre):
+    sin_ext = Path(nombre).stem
+    partes  = sin_ext.replace("-", " ").replace("_", " ").split()
+    partes  = [p for p in partes if not p.isdigit()]
+    return " ".join(partes).title()
+
+def generar_descripcion(categoria, ubicacion):
+    desc = {
+        "ventanas":    "Instalación de ventanas PVC",
+        "puertas":     "Instalación de puertas PVC",
+        "termopanel":  "Proyecto con termopanel",
+        "cortinas":    "Cierre con cortinas o barandas de cristal",
+        "instalacion": "Trabajo de instalación técnica",
+        "general":     "Trabajo realizado por TECNO HERMET",
+    }
+    base = desc.get(categoria, "Trabajo realizado por TECNO HERMET")
+    return f"{base}{' en ' + ubicacion if ubicacion else ''}."
+
+# ── Main ──────────────────────────────────────────────────
+
+def main():
+    TRABAJOS_DIR.mkdir(parents=True, exist_ok=True)
+
+    archivos = sorted([
+        f for f in TRABAJOS_DIR.iterdir()
+        if f.is_file() and f.suffix.lower() in EXTENSIONES
+    ])
+
+    if archivos:
+        # Hay fotos reales → usa solo esas
+        items = []
+        for archivo in archivos:
+            categoria = detectar_categoria(archivo.name)
+            ubicacion = detectar_ubicacion(archivo.name)
+            item = {
+                "title":       limpiar_titulo(archivo.name),
+                "category":    categoria,
+                "image":       f"./assets/trabajos/{archivo.name}",
+                "description": generar_descripcion(categoria, ubicacion),
+                "location":    ubicacion,
+            }
+            items.append(item)
+            print(f"  ✓ {archivo.name} → {categoria} | {ubicacion or 'sin ubicación'}")
+        print(f"\n{len(items)} foto(s) real(es) cargada(s).")
+    else:
+        # Sin fotos reales → mantiene las demo
+        items = DEMO_ITEMS
+        print("Sin fotos reales en assets/trabajos/ → usando imágenes demo.")
+
+    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+        json.dump({"items": items}, f, ensure_ascii=False, indent=2)
+
+    print(f"gallery-data.json actualizado con {len(items)} ítem(s).")
+
+if __name__ == "__main__":
+    main()
