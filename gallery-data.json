@@ -1,52 +1,17 @@
 {
-"items":  [
-    {
-        "title": "Ventanas PVC interior",
-        "category": "ventanas",
-        "image": "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/4f4b2ab93158181304e7509fe92a55b05f551142.jpg",
-        "description": "Proyecto residencial con ventanales de gran formato.",
-        "location": "Santiago"
-    },
-    {
-        "title": "Puerta PVC moderna",
-        "category": "puertas",
-        "image": "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/73245052e0bea4511a763f0f74c230e61eab04a3.jpg",
-        "description": "Puerta con panel vidriado y diseño contemporáneo.",
-        "location": "Las Condes"
-    },
-    {
-        "title": "Cortinas de cristal",
-        "category": "cortinas",
-        "image": "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/00b10446d7cbf17b9c453b8ccf016fa88be40c86.jpg",
-        "description": "Cierre de terraza con cortina transparente.",
-        "location": "Providencia"
-    },
-    {
-        "title": "Sala con termopanel",
-        "category": "termopanel",
-        "image": "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/1f4aed3c43bb1ce6f9f60c667ac588da07f52982.jpg",
-        "description": "Mayor confort térmico y acústico.",
-        "location": "Vitacura"
-    },
-    {
-        "title": "Terraza panorámica",
-        "category": "cortinas",
-        "image": "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/fafbdd837531111e5c3492552047700ce354f14f.jpg",
-        "description": "Solución panorámica en cristal para terraza.",
-        "location": "Ñuñoa"
-    },
-    {
-        "title": "Instalación técnica",
-        "category": "instalacion",
-        "image": "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/b6d7955aca42b445c45898e99ab68800660dd09f.jpg",
-        "description": "Montaje en obra con equipo especializado.",
-        "location": "Santiago"
-    },
+  "items": [
     {
       "title": "Puertatermopanel",
       "category": "puertas",
       "image": "./assets/trabajos/Puertatermopanel.jpeg",
       "description": "Instalación de puertas PVC.",
+      "location": ""
+    },
+    {
+      "title": "Ventana Concepcion",
+      "category": "general",
+      "image": "./assets/trabajos/Ventana_concepcion.jpeg",
+      "description": "Trabajo realizado por TECNO HERMET en Concepción.",
       "location": "Concepción"
     },
     {
@@ -56,5 +21,47 @@
       "description": "Trabajo realizado por TECNO HERMET en Santiago.",
       "location": "Santiago"
     },
+    {
+      "title": "Ventanas PVC interior",
+      "category": "ventanas",
+      "image": "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/4f4b2ab93158181304e7509fe92a55b05f551142.jpg",
+      "description": "Proyecto residencial con ventanales de gran formato.",
+      "location": "Santiago"
+    },
+    {
+      "title": "Puerta PVC moderna",
+      "category": "puertas",
+      "image": "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/73245052e0bea4511a763f0f74c230e61eab04a3.jpg",
+      "description": "Puerta con panel vidriado y diseño contemporáneo.",
+      "location": "Las Condes"
+    },
+    {
+      "title": "Cortinas de cristal",
+      "category": "cortinas",
+      "image": "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/00b10446d7cbf17b9c453b8ccf016fa88be40c86.jpg",
+      "description": "Cierre de terraza con cortina transparente.",
+      "location": "Providencia"
+    },
+    {
+      "title": "Sala con termopanel",
+      "category": "termopanel",
+      "image": "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/1f4aed3c43bb1ce6f9f60c667ac588da07f52982.jpg",
+      "description": "Mayor confort térmico y acústico.",
+      "location": "Vitacura"
+    },
+    {
+      "title": "Terraza panorámica",
+      "category": "cortinas",
+      "image": "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/fafbdd837531111e5c3492552047700ce354f14f.jpg",
+      "description": "Solución panorámica en cristal para terraza.",
+      "location": "Ñuñoa"
+    },
+    {
+      "title": "Instalación técnica",
+      "category": "instalacion",
+      "image": "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/b6d7955aca42b445c45898e99ab68800660dd09f.jpg",
+      "description": "Montaje en obra con equipo especializado.",
+      "location": "Santiago"
+    }
   ]
 }
