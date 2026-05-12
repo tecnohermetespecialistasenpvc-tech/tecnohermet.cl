@@ -24,7 +24,7 @@
     {
       "title": "Puerta Termopanel",
       "category": "puertas",
-      "image": "C:\Users\Oscar\Downloads\TECNO_HERMET\assets\trabajos\Puertatermopanel.jpg",
+      "image": "./assets/trabajos/Puertatermopanel.jpg",
       "description": "Instalación de Puerta termopanel, casa residencial, con aislación térmica",
       "location": "Concepcion, Bío-bio"
     }
