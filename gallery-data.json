@@ -1,5 +1,5 @@
 {
- DEMO_ITEMS = [
+"items":  [
     {
         "title": "Ventanas PVC interior",
         "category": "ventanas",
