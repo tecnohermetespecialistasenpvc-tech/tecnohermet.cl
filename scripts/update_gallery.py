@@ -235,27 +235,53 @@ def generar_descripcion(categoria, ubicacion):
 def main():
     TRABAJOS_DIR.mkdir(parents=True, exist_ok=True)
 
-    archivos = sorted([
-        f for f in TRABAJOS_DIR.iterdir()
-        if f.is_file() and f.suffix.lower() in EXTENSIONES
-    ])
+    # Crear subcarpetas si no existen
+    for cat in ["ventanas", "puertas", "termopanel", "cortinas", "instalacion", "general"]:
+        (TRABAJOS_DIR / cat).mkdir(exist_ok=True)
 
-    # Fotos reales desde assets/trabajos/
     items_reales = []
-    for archivo in archivos:
-        categoria = detectar_categoria(archivo.name)
-        ubicacion = detectar_ubicacion(archivo.name)
-        item = {
-            "title":       limpiar_titulo(archivo.name),
-            "category":    categoria,
-            "image":       f"./assets/trabajos/{archivo.name}",
-            "description": generar_descripcion(categoria, ubicacion),
-            "location":    ubicacion,
-        }
-        items_reales.append(item)
-        print(f"  ✓ {archivo.name} → {categoria} | {ubicacion or 'sin ubicación'}")
 
-    # Combina: reales primero, demo al final
+    # Buscar fotos en subcarpetas (categoría = nombre de la carpeta)
+    subcarpetas = sorted([d for d in TRABAJOS_DIR.iterdir() if d.is_dir()])
+
+    if subcarpetas:
+        for subcarpeta in subcarpetas:
+            categoria = subcarpeta.name.lower()
+            archivos = sorted([
+                f for f in subcarpeta.iterdir()
+                if f.is_file() and f.suffix.lower() in EXTENSIONES
+            ])
+            for archivo in archivos:
+                ubicacion = detectar_ubicacion(archivo.name)
+                item = {
+                    "title":       limpiar_titulo(archivo.name),
+                    "category":    categoria,
+                    "image":       f"./assets/trabajos/{subcarpeta.name}/{archivo.name}",
+                    "description": generar_descripcion(categoria, ubicacion),
+                    "location":    ubicacion,
+                }
+                items_reales.append(item)
+                print(f"  ✓ {subcarpeta.name}/{archivo.name} → {categoria} | {ubicacion or 'sin ubicación'}")
+    else:
+        # Fallback: buscar fotos sueltas en la raíz de assets/trabajos/
+        archivos = sorted([
+            f for f in TRABAJOS_DIR.iterdir()
+            if f.is_file() and f.suffix.lower() in EXTENSIONES
+        ])
+        for archivo in archivos:
+            categoria = detectar_categoria(archivo.name)
+            ubicacion = detectar_ubicacion(archivo.name)
+            item = {
+                "title":       limpiar_titulo(archivo.name),
+                "category":    categoria,
+                "image":       f"./assets/trabajos/{archivo.name}",
+                "description": generar_descripcion(categoria, ubicacion),
+                "location":    ubicacion,
+            }
+            items_reales.append(item)
+            print(f"  ✓ {archivo.name} → {categoria} | {ubicacion or 'sin ubicación'}")
+
+    # Combina reales + demo
     items = items_reales + DEMO_ITEMS
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
