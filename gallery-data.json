@@ -41,13 +41,13 @@
         "image": "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/b6d7955aca42b445c45898e99ab68800660dd09f.jpg",
         "description": "Montaje en obra con equipo especializado.",
         "location": "Santiago"
-    }
+    },
     {
       "title": "Puertatermopanel",
       "category": "puertas",
       "image": "./assets/trabajos/Puertatermopanel.jpeg",
       "description": "Instalación de puertas PVC.",
-      "location": ""
+      "location": "Concepción"
     },
     {
       "title": "Ventana Santiago",
@@ -55,6 +55,6 @@
       "image": "./assets/trabajos/ventana_santiago.jpeg",
       "description": "Trabajo realizado por TECNO HERMET en Santiago.",
       "location": "Santiago"
-    }
+    },
   ]
 }
