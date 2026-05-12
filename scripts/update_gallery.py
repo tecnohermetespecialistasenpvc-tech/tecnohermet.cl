@@ -1,130 +1,131 @@
-import os
-import json
-from pathlib import Path
-
-TRABAJOS_DIR = Path("assets/trabajos")
-OUTPUT_FILE  = Path("gallery-data.json")
-EXTENSIONES  = {".jpg", ".jpeg", ".png", ".webp"}
-
-# ── Diccionarios de detección ─────────────────────────────
-
-CATEGORIAS = {
-    "ventanas":   "ventanas",
-    "puerta":     "puertas",
-    "puertas":    "puertas",
-    "termopanel": "termopanel",
-    "cortina":    "cortinas",
-    "cortinas":   "cortinas",
-    "baranda":    "cortinas",
-    "instalacion":"instalacion",
-    "montaje":    "instalacion",
-    "obra":       "instalacion",
-}
-
 UBICACIONES = {
-    "lascondes":    "Las Condes",
-    "las_condes":   "Las Condes",
-    "providencia":  "Providencia",
-    "vitacura":     "Vitacura",
-    "nunoa":        "Ñuñoa",
-    "ñuñoa":        "Ñuñoa",
-    "maipu":        "Maipú",
-    "maipú":        "Maipú",
-    "santiago":     "Santiago",
-    "lamina":       "Laminado",
-    "peñalolen":    "Peñalolén",
-    "penalolen":    "Peñalolén",
-    "lacisterna":   "La Cisterna",
-    "la_cisterna":  "La Cisterna",
-    "sanmiguel":    "San Miguel",
-    "san_miguel":   "San Miguel",
-    "florida":      "La Florida",
-    "laflorida":    "La Florida",
-    "la_florida":   "La Florida",
-    "macul":        "Macul",
-    "recoleta":     "Recoleta",
-    "independencia":"Independencia",
-    "quilicura":    "Quilicura",
-    "pudahuel":     "Pudahuel",
-    "conchali":     "Conchalí",
-    "conchalí":     "Conchalí",
-    "estacion":     "Estación Central",
-    "huechuraba":   "Huechuraba",
-    "renca":        "Renca",
-    "cerrillos":    "Cerrillos",
-    "buin":         "Buin",
-    "lampa":        "Lampa",
-    "colina":       "Colina",
+    # ── Región Metropolitana ──────────────────────────────
+    "lascondes":       "Las Condes",
+    "las_condes":      "Las Condes",
+    "providencia":     "Providencia",
+    "vitacura":        "Vitacura",
+    "nunoa":           "Ñuñoa",
+    "santiago":        "Santiago",
+    "maipu":           "Maipú",
+    "peñalolen":       "Peñalolén",
+    "penalolen":       "Peñalolén",
+    "lacisterna":      "La Cisterna",
+    "sanmiguel":       "San Miguel",
+    "san_miguel":      "San Miguel",
+    "florida":         "La Florida",
+    "laflorida":       "La Florida",
+    "macul":           "Macul",
+    "recoleta":        "Recoleta",
+    "independencia":   "Independencia",
+    "quilicura":       "Quilicura",
+    "pudahuel":        "Pudahuel",
+    "conchali":        "Conchalí",
+    "huechuraba":      "Huechuraba",
+    "renca":           "Renca",
+    "cerrillos":       "Cerrillos",
+    "colina":          "Colina",
+    "lampa":           "Lampa",
+    "buin":            "Buin",
+    "puente":          "Puente Alto",
+    "puentealto":      "Puente Alto",
+    "puente_alto":     "Puente Alto",
+    "talagante":       "Talagante",
+    "melipilla":       "Melipilla",
+    "santiagocentro":  "Santiago Centro",
+    "barnechea":       "Lo Barnechea",
+    "lobarnechea":     "Lo Barnechea",
+    "loespejo":        "Lo Espejo",
+    "lo_espejo":       "Lo Espejo",
+    "loprado":         "Lo Prado",
+    "lo_prado":        "Lo Prado",
+    "cerro":           "Cerro Navia",
+    "cerronavia":      "Cerro Navia",
+    "cerro_navia":     "Cerro Navia",
+    "estacion":        "Estación Central",
+    "sanjoaquin":      "San Joaquín",
+    "san_joaquin":     "San Joaquín",
+    "sanramón":        "San Ramón",
+    "sanramon":        "San Ramón",
+    "peñaflor":        "Peñaflor",
+    "penaflor":        "Peñaflor",
+
+    # ── Región del Biobío ─────────────────────────────────
+    "concepcion":      "Concepción",
+    "concepción":      "Concepción",
+    "talcahuano":      "Talcahuano",
+    "hualpén":         "Hualpén",
+    "hualpen":         "Hualpén",
+    "sanpedro":        "San Pedro de la Paz",
+    "san_pedro":       "San Pedro de la Paz",
+    "coronel":         "Coronel",
+    "losangeles":      "Los Ángeles",
+    "los_angeles":     "Los Ángeles",
+    "losángeles":      "Los Ángeles",
+    "biobio":          "Biobío",
+    "bío_bío":         "Biobío",
+    "arauco":          "Arauco",
+    "lebu":            "Lebu",
+    "curanilahue":     "Curanilahue",
+    "losalamos":       "Los Álamos",
+    "cañete":          "Cañete",
+    "canete":          "Cañete",
+    "tirua":           "Tirúa",
+    "lota":            "Lota",
+    "tomé":            "Tomé",
+    "tome":            "Tomé",
+    "penco":           "Penco",
+    "hualqui":         "Hualqui",
+    "santajuana":      "Santa Juana",
+    "florida_bio":     "Florida",
+    "yumbel":          "Yumbel",
+    "cabrero":         "Cabrero",
+    "laja":            "Laja",
+    "nacimiento":      "Nacimiento",
+    "mulchen":         "Mulchén",
+    "mulchén":         "Mulchén",
+    "negrete":         "Negrete",
+    "santabarbara":    "Santa Bárbara",
+    "quilaco":         "Quilaco",
+    "quilleco":        "Quilleco",
+    "altobishoften":   "Alto Biobío",
+    "altobiobio":      "Alto Biobío",
+    "contulmo":        "Contulmo",
+    "cañete":          "Cañete",
+    "tucapel":         "Tucapel",
+    "antuco":          "Antuco",
+
+    # ── Región de Ñuble ───────────────────────────────────
+    "chillán":         "Chillán",
+    "chillan":         "Chillán",
+    "chillánviejo":    "Chillán Viejo",
+    "chillanviejo":    "Chillán Viejo",
+    "nuble":           "Ñuble",
+    "ñuble":           "Ñuble",
+    "bulnes":          "Bulnes",
+    "quillon":         "Quillón",
+    "quillón":         "Quillón",
+    "yungay":          "Yungay",
+    "laja_nuble":      "Laja",
+    "sancarlos":       "San Carlos",
+    "san_carlos":      "San Carlos",
+    "niquen":          "Ñiquén",
+    "ñiquen":          "Ñiquén",
+    "sanfabián":       "San Fabián",
+    "san_fabian":      "San Fabián",
+    "ranquil":         "Ranquil",
+    "cobquecura":      "Cobquecura",
+    "coelemu":         "Coelemu",
+    "portezuelo":      "Portezuelo",
+    "treguaco":        "Trehuaco",
+    "quirihue":        "Quirihue",
+    "ninhue":          "Ninhue",
+    "pemuco":          "Pemuco",
+    "pinto":           "Pinto",
+    "coihueco":        "Coihueco",
+    "elcarmen":        "El Carmen",
+    "el_carmen":       "El Carmen",
+    "sanignacio":      "San Ignacio",
+    "san_ignacio":     "San Ignacio",
+    "tucapel_nuble":   "Tucapel",
+    "elpinar":         "El Pinar",
 }
-
-# ── Funciones ─────────────────────────────────────────────
-
-def detectar_categoria(nombre):
-    nombre_lower = nombre.lower()
-    for clave, valor in CATEGORIAS.items():
-        if clave in nombre_lower:
-            return valor
-    return "general"
-
-def detectar_ubicacion(nombre):
-    nombre_lower = nombre.lower().replace("-", "").replace("_", "")
-    for clave, valor in UBICACIONES.items():
-        if clave.replace("_", "") in nombre_lower:
-            return valor
-    return ""
-
-def limpiar_titulo(nombre):
-    sin_ext = Path(nombre).stem
-    partes  = sin_ext.replace("-", " ").replace("_", " ").split()
-    # Elimina números sueltos al final (ej: 01, 02)
-    partes  = [p for p in partes if not p.isdigit()]
-    return " ".join(partes).title()
-
-def generar_descripcion(categoria, ubicacion):
-    desc = {
-        "ventanas":    "Instalación de ventanas PVC",
-        "puertas":     "Instalación de puertas PVC",
-        "termopanel":  "Proyecto con termopanel",
-        "cortinas":    "Cierre con cortinas o barandas de cristal",
-        "instalacion": "Trabajo de instalación técnica",
-        "general":     "Trabajo realizado por TECNO HERMET",
-    }
-    base = desc.get(categoria, "Trabajo realizado por TECNO HERMET")
-    return f"{base}{' en ' + ubicacion if ubicacion else ''}."
-
-# ── Main ──────────────────────────────────────────────────
-
-def main():
-    items = []
-
-    if not TRABAJOS_DIR.exists():
-        print(f"Carpeta {TRABAJOS_DIR} no encontrada. Creándola...")
-        TRABAJOS_DIR.mkdir(parents=True, exist_ok=True)
-
-    archivos = sorted([
-        f for f in TRABAJOS_DIR.iterdir()
-        if f.is_file() and f.suffix.lower() in EXTENSIONES
-    ])
-
-    for archivo in archivos:
-        categoria = detectar_categoria(archivo.name)
-        ubicacion = detectar_ubicacion(archivo.name)
-        item = {
-            "title":       limpiar_titulo(archivo.name),
-            "category":    categoria,
-            "image":       f"./assets/trabajos/{archivo.name}",
-            "description": generar_descripcion(categoria, ubicacion),
-            "location":    ubicacion,
-        }
-        items.append(item)
-        print(f"  ✓ {archivo.name} → {categoria} | {ubicacion or 'sin ubicación'}")
-
-    data = {"items": items}
-
-    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
-
-    print(f"\ngallery-data.json actualizado con {len(items)} imagen(es).")
-
-if __name__ == "__main__":
-    main()
