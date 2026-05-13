@@ -442,6 +442,23 @@
         justify-content:flex-start;
         gap:.8rem;
       }
+      .spam-check{
+  display:flex;
+  align-items:center;
+  gap:.6rem;
+  background:#f5f7fb;
+  border:1px solid #d7dfeb;
+  border-radius:.8rem;
+  padding:.8rem 1rem;
+  font-size:.95rem;
+  color:#24324a;
+}
+
+.spam-check input{
+  width:18px;
+  height:18px;
+  margin:0;
+}
     }
   </style>
 </head>
@@ -577,11 +594,28 @@
       </div>
 
       <form class="contact-form" action="https://formspree.io/f/tu-id" method="POST">
-        <input type="text" name="name" placeholder="Tu nombre" required>
-        <input type="email" name="email" placeholder="Tu correo" required>
-        <textarea name="message" rows="5" placeholder="Cuéntanos qué necesitas" required></textarea>
-        <button class="btn btn-primary" type="submit">Enviar mensaje</button>
-      </form>
+  <input type="text" name="name" placeholder="Tu nombre" required>
+
+  <input
+    type="tel"
+    name="phone"
+    placeholder="+56 9 1234 5678"
+    pattern="^\+56\s?9\s?\d{4}\s?\d{4}$"
+    title="Ingresa un número chileno válido con +56, por ejemplo: +56 9 1234 5678"
+    required
+  >
+
+  <input type="email" name="email" placeholder="Tu correo" required>
+
+  <textarea name="message" rows="5" placeholder="Cuéntanos qué necesitas" required></textarea>
+
+  <div class="spam-check">
+    <input type="checkbox" id="noRobot" name="noRobot" required>
+    <label for="noRobot">No soy un robot</label>
+  </div>
+
+  <button class="btn btn-primary" type="submit">Enviar mensaje</button>
+</form>
     </div>
   </section>
 
