@@ -1,204 +1,582 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TECNO HERMET | Especialistas en PVC</title>
-  <meta name="description" content="TECNO HERMET - Fabricación e instalación de ventanas, puertas y termopaneles en PVC.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TECNO HERMET | Ventanas y Puertas PVC</title>
   <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:Arial,sans-serif;background:#f4f7fb;color:#122034;line-height:1.6}
-    header{background:linear-gradient(135deg,#005f8f,#00b1b8 52%,#ff8a3d);color:white;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
-    header strong{font-size:1.4rem;letter-spacing:.05em}
-    nav a{color:white;text-decoration:none;margin-left:1.5rem;font-size:.95rem}
-    .hero{min-height:90vh;display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;padding:4rem 2rem;max-width:1180px;margin:0 auto}
-    .hero h1{font-size:clamp(2rem,3.5vw,3.5rem);line-height:1.05;margin:1rem 0 1.2rem}
-    .hero p{color:#4b607c;margin-bottom:1.5rem}
-    .hero-img{background:linear-gradient(135deg,#005f8f,#00b1b8 50%,#ff8a3d);border-radius:2rem;min-height:480px;display:grid;place-items:center;color:white;font-size:1.2rem;text-align:center;padding:2rem}
-    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 1.4rem;border-radius:999px;font-weight:700;text-decoration:none;margin-right:.8rem;margin-bottom:.5rem}
-    .btn-primary{background:linear-gradient(135deg,#005f8f,#00b1b8 52%,#ff8a3d);color:white}
-    .btn-secondary{background:white;color:#005f8f;border:1px solid #d9e2ef}
-    .btn-whatsapp{background:#25D366;color:white}
-    section{padding:4rem 2rem;max-width:1180px;margin:0 auto}
-    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
-    .card{background:white;border-radius:1.5rem;padding:1.5rem;box-shadow:0 10px 28px rgba(9,32,61,.08);border:1px solid #d9e2ef}
-    .card h3{margin:.4rem 0 .6rem;font-size:1.1rem}
-    .card p,.card li{color:#4b607c;font-size:.95rem}
-    .card ul{list-style:none;margin-top:.8rem}
-    .card li{padding:.35rem 0 .35rem 1rem;position:relative}
-    .card li::before{content:"";position:absolute;left:0;top:.85rem;width:.4rem;height:.4rem;border-radius:50%;background:#ff8a3d}
-    .tag{display:inline-flex;padding:.35rem .75rem;border-radius:999px;background:#ddf6f4;color:#005f8f;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:1rem}
-    h2{font-size:clamp(1.5rem,2vw,2.2rem);margin-bottom:.8rem;line-height:1.1}
-    .gallery-toolbar{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1.5rem}
-    .filter-btn{padding:.6rem 1rem;border-radius:999px;background:white;border:1px solid #d9e2ef;font-weight:600;cursor:pointer;font-size:.9rem}
-    .filter-btn.active{background:linear-gradient(135deg,#005f8f,#00b1b8);color:white;border:0}
-    #galleryGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-    .gallery-card{background:white;border-radius:1.5rem;overflow:hidden;box-shadow:0 10px 28px rgba(9,32,61,.08);cursor:pointer}
-    .gallery-card img{width:100%;height:230px;object-fit:cover;transition:transform .3s}
-    .gallery-card:hover img{transform:scale(1.04)}
-    .gallery-copy{padding:1rem 1.1rem}
-    .gallery-copy h3{font-size:1rem;margin-bottom:.3rem}
-    .gallery-copy p,.gallery-copy small{color:#4b607c;font-size:.88rem}
-    .lightbox{position:fixed;inset:0;display:none;place-items:center;background:rgba(6,15,24,.85);z-index:500;padding:1rem}
-    .lightbox.open{display:grid}
-    .lb-dialog{width:min(100%,1000px);position:relative}
-    .lb-dialog img{width:100%;max-height:75vh;object-fit:contain;border-radius:1rem}
-    .lb-close,.lb-prev,.lb-next{position:absolute;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.15);color:white;display:grid;place-items:center;font-size:1.5rem;border:0;cursor:pointer}
-    .lb-close{top:.5rem;right:.5rem}
-    .lb-prev{left:.5rem;top:50%;transform:translateY(-50%)}
-    .lb-next{right:.5rem;top:50%;transform:translateY(-50%)}
-    .lb-meta{margin-top:.8rem;padding:1rem;border-radius:1rem;background:rgba(255,255,255,.1);color:white}
-    .banner{padding:3.5rem 2rem;background:linear-gradient(135deg,#005f8f,#00b1b8 52%,#ff8a3d);color:white;text-align:center}
-    .banner h2{font-size:clamp(1.5rem,2.5vw,2.5rem);margin-bottom:1rem}
-    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:1180px;margin:0 auto}
-    .contact-box{background:white;border-radius:1.5rem;padding:1.8rem;box-shadow:0 10px 28px rgba(9,32,61,.08)}
-    input,textarea,select{width:100%;padding:12px 14px;border-radius:12px;border:1px solid #d9e2ef;background:#f8fbff;color:#122034;margin-top:.4rem;font-family:inherit;font-size:.95rem}
-    textarea{min-height:130px;resize:vertical}
-    .form-field{display:grid;gap:.2rem;margin-bottom:.9rem}
-    label{font-size:.9rem;font-weight:600}
-    .submit-btn{display:block;width:100%;padding:14px;border-radius:12px;background:#25D366;color:white;font-weight:700;text-align:center;text-decoration:none;margin-top:.5rem;font-size:1rem}
-    footer{padding:2rem;background:#101b29;color:#a7b9ce;text-align:center;font-size:.9rem}
-    .wa-float{position:fixed;right:18px;bottom:18px;z-index:400;width:58px;height:58px;border-radius:50%;background:#25D366;color:white;display:grid;place-items:center;text-decoration:none;box-shadow:0 14px 36px rgba(37,211,102,.4)}
-    .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
-    .reveal.is-visible{opacity:1;transform:translateY(0)}
-    @media(max-width:900px){.hero,.contact-grid,.grid3,.grid2,#galleryGrid{grid-template-columns:1fr}}
-    @media(max-width:600px){header nav{display:none}.hero{min-height:auto;padding:2rem 1rem}}
+    :root{
+      --blue:#13235d;
+      --blue2:#1e3a8a;
+      --light:#f5f7fb;
+      --accent:#2ea0ff;
+      --text:#1b2430;
+      --muted:#5f6b7a;
+      --white:#fff;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      color:var(--text);
+      background:var(--light);
+    }
+    a{text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{
+      width:min(1200px, calc(100% - 2rem));
+      margin:0 auto;
+    }
+
+    .site-header{
+      background:#fff;
+      position:sticky;
+      top:0;
+      z-index:1000;
+      box-shadow:0 2px 12px rgba(0,0,0,.06);
+    }
+    .header-inner{
+      min-height:74px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      padding:0.8rem 0;
+    }
+    .logo{
+      font-weight:800;
+      color:#137bd1;
+      font-size:1.1rem;
+      letter-spacing:.2px;
+      white-space:nowrap;
+    }
+    .main-nav{
+      display:flex;
+      gap:1.2rem;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .main-nav a,
+    .header-phone{
+      color:#24324a;
+      font-weight:600;
+      font-size:.95rem;
+    }
+
+    .hero-rogoluma{
+      display:grid;
+      grid-template-columns:1.12fr .88fr;
+      min-height:78vh;
+      background:#fff;
+    }
+    .hero-rogoluma__image{
+      position:relative;
+      overflow:hidden;
+      min-height:560px;
+    }
+    .hero-rogoluma__image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    .hero-rogoluma__content{
+      background:var(--blue);
+      color:#fff;
+      padding:4rem 3rem;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-rogoluma__content::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.05) 25%, transparent 25%) -20px 0/40px 40px,
+        linear-gradient(225deg, rgba(255,255,255,.05) 25%, transparent 25%) -20px 0/40px 40px;
+      opacity:.25;
+      pointer-events:none;
+    }
+    .hero-rogoluma__content > *{position:relative;z-index:1}
+    .hero-rogoluma__eyebrow{
+      margin:0 0 .8rem;
+      color:#9ed0ff;
+      font-weight:700;
+      font-size:.9rem;
+      letter-spacing:.3px;
+    }
+    .hero-rogoluma__content h1{
+      font-size:clamp(2.2rem, 4.2vw, 4rem);
+      line-height:1.02;
+      margin:0 0 1rem;
+      max-width:12ch;
+      text-transform:uppercase;
+    }
+    .hero-rogoluma__subtitle{
+      max-width:34ch;
+      font-size:1.05rem;
+      line-height:1.6;
+      margin:0 0 1.6rem;
+      color:rgba(255,255,255,.92);
+    }
+    .hero-rogoluma__bullets{
+      list-style:none;
+      padding:0;
+      margin:0 0 2rem;
+      display:flex;
+      gap:1.4rem;
+      flex-wrap:wrap;
+    }
+    .hero-rogoluma__bullets li{
+      padding-left:1.2rem;
+      position:relative;
+      font-weight:600;
+    }
+    .hero-rogoluma__bullets li::before{
+      content:"▣";
+      position:absolute;
+      left:0;
+      top:0;
+      color:#9ed0ff;
+    }
+    .hero-rogoluma__actions{
+      display:flex;
+      gap:1rem;
+      flex-wrap:wrap;
+    }
+    .btn{
+      display:inline-block;
+      padding:.9rem 1.4rem;
+      border-radius:999px;
+      font-weight:700;
+      font-size:.95rem;
+    }
+    .btn-primary{
+      background:var(--accent);
+      color:#fff;
+    }
+    .btn-secondary{
+      background:#fff;
+      color:var(--blue);
+    }
+
+    .hero-rogoluma__bottom{
+      display:grid;
+      grid-template-columns:1fr 90px;
+    }
+    .hero-rogoluma__bottom-left{
+      background:#172a7a;
+      color:#fff;
+      padding:1rem 1.5rem;
+      font-weight:700;
+      display:flex;
+      align-items:center;
+      min-height:58px;
+    }
+    .hero-rogoluma__bottom-right{
+      background:#2ea0ff;
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:1.4rem;
+      font-weight:800;
+    }
+
+    section.content{
+      padding:4rem 0;
+    }
+    .section-title{
+      font-size:clamp(1.8rem, 2.8vw, 2.6rem);
+      margin:0 0 .6rem;
+      color:var(--text);
+    }
+    .section-subtitle{
+      margin:0 0 1.8rem;
+      color:var(--muted);
+      line-height:1.6;
+      max-width:58ch;
+    }
+    .services-grid{
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:1rem;
+    }
+    .service-card{
+      background:#fff;
+      border-radius:1.2rem;
+      padding:1.3rem;
+      box-shadow:0 8px 24px rgba(17,35,64,.08);
+      min-height:140px;
+    }
+    .service-card h3{
+      margin:.2rem 0 .5rem;
+      font-size:1.05rem;
+    }
+    .service-card p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.55;
+      font-size:.95rem;
+    }
+
+    .filters{
+      display:flex;
+      gap:.75rem;
+      flex-wrap:wrap;
+      margin-bottom:1.5rem;
+    }
+    .filter-btn{
+      border:none;
+      background:#fff;
+      color:#1e293b;
+      padding:.7rem 1rem;
+      border-radius:999px;
+      font-weight:700;
+      cursor:pointer;
+      box-shadow:0 4px 14px rgba(17,35,64,.08);
+    }
+    .filter-btn.active{
+      background:var(--blue);
+      color:#fff;
+    }
+
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:1rem;
+    }
+    .gallery-item{
+      background:#fff;
+      border-radius:1.2rem;
+      overflow:hidden;
+      box-shadow:0 8px 24px rgba(17,35,64,.08);
+      cursor:pointer;
+    }
+    .gallery-item img{
+      width:100%;
+      height:240px;
+      object-fit:cover;
+    }
+    .gallery-item .info{
+      padding:1rem 1rem 1.1rem;
+    }
+    .gallery-item .info h3{
+      margin:0 0 .4rem;
+      font-size:1rem;
+    }
+    .gallery-item .info p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.5;
+      font-size:.95rem;
+    }
+
+    .contact-box{
+      background:#fff;
+      border-radius:1.4rem;
+      box-shadow:0 8px 24px rgba(17,35,64,.08);
+      padding:1.6rem;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:1rem;
+      align-items:start;
+    }
+    .contact-box a{
+      color:var(--blue2);
+      font-weight:700;
+    }
+    .contact-form{
+      display:grid;
+      gap:.8rem;
+    }
+    .contact-form input,
+    .contact-form textarea{
+      width:100%;
+      border:1px solid #d7dfeb;
+      border-radius:.8rem;
+      padding:.9rem 1rem;
+      font-size:1rem;
+      font-family:inherit;
+    }
+    .contact-form textarea{
+      resize:vertical;
+    }
+
+    .modal{
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.8);
+      z-index:2000;
+      align-items:center;
+      justify-content:center;
+      padding:1rem;
+    }
+    .modal.open{display:flex;}
+    .modal-content{
+      max-width:min(1100px, 96vw);
+      max-height:92vh;
+      background:#fff;
+      border-radius:1rem;
+      overflow:hidden;
+      position:relative;
+    }
+    .modal-content img{
+      width:100%;
+      height:auto;
+      max-height:92vh;
+      object-fit:contain;
+    }
+    .modal-close{
+      position:absolute;
+      top:.6rem;
+      right:.6rem;
+      border:none;
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      font-size:1.2rem;
+      background:#fff;
+      cursor:pointer;
+      box-shadow:0 4px 16px rgba(0,0,0,.15);
+    }
+
+    .whatsapp-float{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  background:#25d366;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 10px 24px rgba(0,0,0,.2);
+  z-index:3000;
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.whatsapp-float:hover{
+  transform:scale(1.06);
+  box-shadow:0 14px 28px rgba(0,0,0,.25);
+}
+
+    footer{
+      padding:2rem 0 3rem;
+      color:var(--muted);
+      text-align:center;
+    }
+
+    @media (max-width: 980px){
+      .hero-rogoluma,
+      .hero-rogoluma__bottom,
+      .services-grid,
+      .gallery,
+      .contact-box{
+        grid-template-columns:1fr;
+      }
+      .hero-rogoluma__image{
+        min-height:360px;
+      }
+      .hero-rogoluma__content{
+        padding:2.5rem 1.4rem;
+      }
+      .header-inner{
+        flex-direction:column;
+        align-items:flex-start;
+        padding:1rem 0;
+      }
+      .main-nav{
+        justify-content:flex-start;
+        gap:.8rem;
+      }
+    }
   </style>
 </head>
 <body>
-<header>
-  <strong>TECNO HERMET</strong>
-  <nav>
-    <a href="#empresa">Empresa</a>
-    <a href="#servicios">Servicios</a>
-    <a href="#galeria">Galería</a>
-    <a href="#contacto">Contacto</a>
-    <a href="admin/index.html" style="background:rgba(255,255,255,.18);padding:.4rem .9rem;border-radius:999px">Admin</a>
-  </nav>
-</header>
 
-<section class="hero" id="inicio">
-  <div class="reveal">
-    <span class="tag">PVC · Termopanel · Cerramientos</span>
-    <h1>Fabricamos e instalamos ventanas y puertas de alta calidad.</h1>
-    <p>TECNO HERMET es una empresa especializada en soluciones de PVC y termopanel con más de 20 años de experiencia en proyectos residenciales, comerciales e industriales.</p>
-    <a class="btn btn-primary" href="https://wa.me/56900000000?text=Hola%20TECNO%20HERMET,%20quiero%20cotizar." target="_blank">Cotizar por WhatsApp</a>
-    <a class="btn btn-secondary" href="#galeria">Ver galería</a>
-  </div>
-   <div class="hero-img reveal" style="background:#fff;overflow:hidden;padding:0;min-height:480px">
-    <img src="./assets/portada_tecno.png" alt="Operario TECNO HERMET trabajando con ventanas PVC" style="width:100%;height:100%;object-fit:cover;display:block">
-  </div>
-</section>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="#inicio">TECNO HERMET</a>
+      <nav class="main-nav">
+        <a href="#inicio">Inicio</a>
+        <a href="#empresa">Empresa</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#galeria">Galería</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <a class="header-phone" href="tel:+56967223543">📞 569 6722 3543</a>
+    </div>
+  </header>
 
-<section id="empresa">
-  <div class="reveal"><span class="tag">Quiénes somos</span></div>
-  <div class="grid2" style="margin-top:1rem">
-    <div class="card reveal"><h3>Más de 10 años de experiencia</h3><p>Especialistas en fabricación e instalación de ventanas, puertas y termopaneles. Proyectos residenciales, comerciales e industriales con altos estándares.</p></div>
-    <div class="card reveal"><h3>Compromiso con cada cliente</h3><p>Asesoría técnica desde el diseño hasta la instalación, cumplimiento de plazos y atención enfocada en satisfacción y confianza.</p></div>
-  </div>
-</section>
+  <section class="hero-rogoluma" id="inicio">
+    <div class="hero-rogoluma__image">
+      <img src="./assets/portada_tecno.png" alt="Operario TECNO HERMET trabajando con ventanas PVC">
+    </div>
 
-<section id="servicios">
-  <div class="reveal"><span class="tag">Servicios</span><h2>Soluciones completas en PVC</h2></div>
-  <div class="grid3">
-    <div class="card reveal"><h3>Ventanas PVC</h3><p>Fabricación e instalación a medida con aislación térmica y acústica superior.</p><ul><li>Correderas y fijas</li><li>Abatibles y oscilobatientes</li><li>Termopanel doble y triple</li></ul></div>
-    <div class="card reveal"><h3>Puertas PVC</h3><p>Accesos modernos y seguros para uso residencial y comercial.</p><ul><li>Puertas corredizas</li><li>Puertas batientes</li><li>Paneles vidriados</li></ul></div>
-    <div class="card reveal"><h3>Cierres y cristal</h3><p>Soluciones elegantes para terrazas, balcones y espacios exteriores.</p><ul><li>Barandas de cristal</li><li>Cortinas de cristal</li><li>Mantención y postventa</li></ul></div>
-  </div>
-</section>
+    <div class="hero-rogoluma__content">
+      <p class="hero-rogoluma__eyebrow">Bienvenidos a TECNO HERMET</p>
+      <h1>Fabricamos y distribuimos ventanas y puertas de PVC</h1>
+      <p class="hero-rogoluma__subtitle">Soluciones profesionales para hogares, oficinas y proyectos de construcción.</p>
 
-<section id="galeria">
-  <div class="reveal"><span class="tag">Galería</span><h2>Trabajos realizados</h2><p style="color:#4b607c;margin-bottom:1.5rem">Filtra por tipo de trabajo. Haz clic para ver en grande.</p></div>
-  <div class="gallery-toolbar reveal" id="galleryFilters"></div>
-  <div id="galleryGrid"></div>
-  <div id="galleryEmpty" hidden style="padding:2rem;text-align:center;background:white;border-radius:1.5rem;border:2px dashed #d9e2ef"><p style="color:#4b607c">No hay trabajos en esta categoría aún.</p></div>
-</section>
+      <ul class="hero-rogoluma__bullets">
+        <li>Grandes superficies</li>
+        <li>Talleres profesionales</li>
+      </ul>
 
-<div class="banner">
-  <h2>¿Listo para cotizar tu proyecto?</h2>
-  <p style="margin-bottom:1.5rem;opacity:.9">Contáctanos por WhatsApp o completa el formulario.</p>
-  <a class="btn btn-whatsapp" href="https://wa.me/56900000000?text=Hola%20TECNO%20HERMET,%20quiero%20cotizar." target="_blank">Abrir WhatsApp ahora</a>
-</div>
-
-<section id="contacto" style="padding-top:3rem">
-  <div class="contact-grid">
-    <div class="contact-box reveal">
-      <span class="tag">Contacto</span>
-      <h2>Datos de contacto</h2>
-      <div style="display:grid;gap:1rem;margin-top:1rem">
-        <div><strong>Empresa</strong><p style="color:#4b607c">TECNO HERMET · Especialistas en PVC</p></div>
-        <div><strong>WhatsApp</strong><p style="color:#4b607c">+56 9 0000 0000 ← reemplaza</p></div>
-        <div><strong>Correo</strong><p style="color:#4b607c">tecnohermetespecialistasenpvc@gmail.com</p></div>
+      <div class="hero-rogoluma__actions">
+        <a class="btn btn-primary" href="#galeria">Ver galería</a>
+        <a class="btn btn-secondary" href="https://wa.me/56967223543?text=Hola%20TECNO%20HERMET,%20quiero%20cotizar." target="_blank">Cotizar ahora</a>
       </div>
     </div>
-    <div class="contact-box reveal">
-      <span class="tag">Cotización</span>
-      <h2>Solicitar cotización</h2>
-      <div class="form-field"><label>Nombre</label><input type="text" placeholder="Tu nombre"></div>
-      <div class="form-field"><label>Teléfono</label><input type="tel" placeholder="+56 9"></div>
-      <div class="form-field"><label>Servicio</label>
-        <select><option>Ventanas PVC</option><option>Puertas PVC</option><option>Termopanel</option><option>Cortinas de cristal</option></select>
-      </div>
-      <div class="form-field"><label>Proyecto</label><textarea placeholder="Describe tu proyecto, comuna y medidas."></textarea></div>
-      <a class="submit-btn" href="https://wa.me/56900000000?text=Hola%20TECNO%20HERMET,%20quiero%20cotizar." target="_blank">Enviar por WhatsApp</a>
+  </section>
+
+  <div class="hero-rogoluma__bottom">
+    <div class="hero-rogoluma__bottom-left">Solicita información sin compromiso</div>
+    <div class="hero-rogoluma__bottom-right">↓</div>
+  </div>
+
+  <section class="content container" id="empresa">
+    <h2 class="section-title">Empresa</h2>
+    <p class="section-subtitle">TECNO HERMET desarrolla soluciones en PVC, termopanel y cerramientos con foco en calidad, instalación prolija y atención personalizada.</p>
+  </section>
+
+  <section class="content container" id="servicios">
+    <h2 class="section-title">Servicios</h2>
+    <p class="section-subtitle">Trabajos para proyectos residenciales y comerciales, con fabricación e instalación a medida.</p>
+    <div class="services-grid">
+      <article class="service-card"><h3>Ventanas PVC</h3><p>Fabricación e instalación de ventanas correderas, abatibles y proyectantes.</p></article>
+      <article class="service-card"><h3>Puertas PVC</h3><p>Puertas de acceso, interiores y soluciones especiales para proyectos.</p></article>
+      <article class="service-card"><h3>Termopanel</h3><p>Mayor aislamiento térmico y acústico para viviendas y oficinas.</p></article>
+      <article class="service-card"><h3>Cerramientos</h3><p>Cortinas de cristal, barandas y cierres para terrazas y espacios.</p></article>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer>TECNO HERMET · Especialistas en PVC · Sitio listo para GitHub Pages</footer>
+  <section class="content container" id="galeria">
+    <h2 class="section-title">Trabajos realizados</h2>
+    <p class="section-subtitle">Filtra por tipo de trabajo. Haz clic para ver en grande.</p>
 
-<div class="lightbox" id="lightbox">
-  <div class="lb-dialog">
-    <button class="lb-close" id="lbClose">×</button>
-    <button class="lb-prev" id="lbPrev">‹</button>
-    <img id="lbImg" src="" alt="">
-    <button class="lb-next" id="lbNext">›</button>
-    <div class="lb-meta"><strong id="lbTitle"></strong><p id="lbDesc" style="opacity:.8;font-size:.9rem;margin-top:.3rem"></p></div>
-  </div>
-</div>
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">todos</button>
+      <button class="filter-btn" data-filter="ventanas">ventanas</button>
+      <button class="filter-btn" data-filter="puertas">puertas</button>
+      <button class="filter-btn" data-filter="cortinas">cortinas</button>
+      <button class="filter-btn" data-filter="termopanel">termopanel</button>
+      <button class="filter-btn" data-filter="instalacion">instalacion</button>
+      <button class="filter-btn" data-filter="general">general</button>
+    </div>
 
-<a class="wa-float" href="https://wa.me/56900000000?text=Hola%20TECNO%20HERMET,%20necesito%20cotizar." target="_blank" aria-label="WhatsApp">
-  <svg width="28" height="28" viewBox="0 0 32 32" fill="currentColor"><path d="M19.11 17.34c-.29-.15-1.71-.84-1.98-.94-.26-.1-.45-.15-.64.15-.19.29-.74.94-.91 1.13-.17.19-.34.22-.63.08-.29-.15-1.22-.45-2.33-1.44-.86-.77-1.45-1.72-1.62-2.01-.17-.29-.02-.45.13-.59.13-.12.29-.32.43-.48.14-.17.19-.29.29-.49.1-.19.05-.37-.02-.52-.08-.15-.64-1.55-.88-2.12-.23-.56-.47-.48-.64-.49h-.55c-.19 0-.49.07-.74.34-.26.29-.99.97-.99 2.37 0 1.4 1.02 2.76 1.16 2.95.15.19 2 3.05 4.84 4.28.68.29 1.21.47 1.62.6.68.22 1.29.19 1.77.12.54-.08 1.71-.7 1.95-1.38.24-.68.24-1.26.17-1.38-.07-.12-.26-.19-.55-.34zM16.03 27.5h-.01a11.2 11.2 0 0 1-5.69-1.55l-.41-.24-4.23 1.11 1.13-4.12-.27-.42a11.18 11.18 0 1 1 9.48 5.22zm9.52-20.68A13.36 13.36 0 0 0 16.05 3C8.68 3 2.7 8.98 2.7 16.35c0 2.35.61 4.65 1.77 6.68L2.6 29.86l6.99-1.83a13.3 13.3 0 0 0 6.46 1.65h.01c7.37 0 13.35-5.98 13.35-13.35 0-3.57-1.39-6.93-3.86-9.51z"/></svg>
+    <div class="gallery" id="galleryGrid"></div>
+  </section>
+
+  <section class="content container" id="contacto">
+    <h2 class="section-title">Contacto</h2>
+    <p class="section-subtitle">Escríbenos y te responderemos a la brevedad con una propuesta a medida.</p>
+
+    <div class="contact-box">
+      <div>
+        <strong>WhatsApp:</strong> <a href="https://wa.me/56967223543" target="_blank">+56 9 6722 3543</a><br>
+        <strong>Correo:</strong> <a href="mailto:contacto@tecnohermet.cl">contacto@tecnohermet.cl</a><br>
+        <strong>Ubicación:</strong> Santiago, Chile
+      </div>
+
+      <form class="contact-form" action="https://formspree.io/f/tu-id" method="POST">
+        <input type="text" name="name" placeholder="Tu nombre" required>
+        <input type="email" name="email" placeholder="Tu correo" required>
+        <textarea name="message" rows="5" placeholder="Cuéntanos qué necesitas" required></textarea>
+        <button class="btn btn-primary" type="submit">Enviar mensaje</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 TECNO HERMET. Todos los derechos reservados.
+  </footer>
+
+  <a class="whatsapp-float" href="https://wa.me/56967223543?text=Hola%20TECNO%20HERMET,%20quiero%20cotizar." target="_blank" aria-label="WhatsApp">
+  <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false">
+    <path fill="#FFFFFF" d="M19.11 17.1c-.28-.14-1.65-.81-1.9-.9-.25-.09-.43-.14-.61.14-.18.28-.7.9-.86 1.09-.16.19-.32.21-.6.07-.28-.14-1.17-.43-2.24-1.38-.83-.74-1.39-1.65-1.55-1.93-.16-.28-.02-.43.12-.57.12-.12.28-.32.42-.48.14-.16.19-.28.28-.46.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2-.22-.52-.45-.45-.61-.45h-.52c-.18 0-.48.07-.73.34s-.98.96-.98 2.34.99 2.72 1.13 2.91c.14.19 1.96 2.99 4.75 4.19.66.28 1.17.45 1.57.58.66.21 1.27.18 1.75.11.53-.08 1.65-.67 1.88-1.33.23-.66.23-1.22.16-1.33-.07-.11-.25-.18-.53-.32z"/>
+    <path fill="#FFFFFF" d="M16 3C9.37 3 4 8.37 4 15c0 2.18.58 4.23 1.59 5.99L4 29l8.21-1.56A11.95 11.95 0 0 0 16 27c6.63 0 12-5.37 12-12S22.63 3 16 3zm0 21.7c-1.77 0-3.49-.46-4.99-1.33l-.36-.21-4.87.93.98-4.75-.24-.39A9.67 9.67 0 1 1 16 24.7z"/>
+  </svg>
 </a>
 
-<script>
-const fallback={items:[
-  {title:"Ventanas PVC interior",category:"ventanas",image:"https://pplx-res.cloudinary.com/image/upload/pplx_search_images/4f4b2ab93158181304e7509fe92a55b05f551142.jpg",description:"Proyecto residencial con ventanales de gran formato.",location:"Santiago"},
-  {title:"Puerta PVC moderna",category:"puertas",image:"https://pplx-res.cloudinary.com/image/upload/pplx_search_images/73245052e0bea4511a763f0f74c230e61eab04a3.jpg",description:"Puerta con panel vidriado y diseño contemporáneo.",location:"Las Condes"},
-  {title:"Cortinas de cristal",category:"cortinas",image:"https://pplx-res.cloudinary.com/image/upload/pplx_search_images/00b10446d7cbf17b9c453b8ccf016fa88be40c86.jpg",description:"Cierre de terraza con cortina transparente.",location:"Providencia"},
-  {title:"Sala con termopanel",category:"termopanel",image:"https://pplx-res.cloudinary.com/image/upload/pplx_search_images/1f4aed3c43bb1ce6f9f60c667ac588da07f52982.jpg",description:"Mayor confort térmico y acústico.",location:"Vitacura"},
-  {title:"Terraza panorámica",category:"cortinas",image:"https://pplx-res.cloudinary.com/image/upload/pplx_search_images/fafbdd837531111e5c3492552047700ce354f14f.jpg",description:"Solución panorámica en cristal.",location:"Ñuñoa"},
-  {title:"Instalación técnica",category:"instalacion",image:"https://pplx-res.cloudinary.com/image/upload/pplx_search_images/b6d7955aca42b445c45898e99ab68800660dd09f.jpg",description:"Montaje en obra con equipo especializado.",location:"Santiago"}
-]};
-let items=[],filtered=[],idx=0,cat="todos";
-const grid=document.getElementById("galleryGrid");
-const filters=document.getElementById("galleryFilters");
-const empty=document.getElementById("galleryEmpty");
-const lb=document.getElementById("lightbox");
-function renderFilters(){
-  const cats=["todos",...new Set(items.map(i=>i.category))];
-  filters.innerHTML=cats.map(c=>`<button class="filter-btn ${c===cat?"active":""}" data-c="${c}">${c}</button>`).join("");
-  filters.querySelectorAll(".filter-btn").forEach(b=>b.addEventListener("click",()=>{cat=b.dataset.c;renderFilters();renderGrid();}));
-}
-function renderGrid(){
-  filtered=cat==="todos"?items:items.filter(i=>i.category===cat);
-  grid.innerHTML=filtered.map((i,n)=>`<div class="gallery-card"><img src="${i.image}" alt="${i.title}" data-n="${n}" loading="lazy"><div class="gallery-copy"><h3>${i.title}</h3><p>${i.description}</p><small>${i.location||""} · ${i.category}</small></div></div>`).join("");
-  empty.hidden=filtered.length>0;
-  grid.querySelectorAll("img").forEach(img=>img.addEventListener("click",()=>openLb(+img.dataset.n)));
-}
-function openLb(n){idx=n;const i=filtered[n];document.getElementById("lbImg").src=i.image;document.getElementById("lbImg").alt=i.title;document.getElementById("lbTitle").textContent=i.title;document.getElementById("lbDesc").textContent=i.description+(i.location?" · "+i.location:"");lb.classList.add("open");}
-function closeLb(){lb.classList.remove("open");}
-function moveLb(s){idx=(idx+s+filtered.length)%filtered.length;openLb(idx);}
-document.getElementById("lbClose").onclick=closeLb;
-document.getElementById("lbPrev").onclick=()=>moveLb(-1);
-document.getElementById("lbNext").onclick=()=>moveLb(1);
-lb.addEventListener("click",e=>{if(e.target===lb)closeLb();});
-document.addEventListener("keydown",e=>{if(!lb.classList.contains("open"))return;if(e.key==="Escape")closeLb();if(e.key==="ArrowLeft")moveLb(-1);if(e.key==="ArrowRight")moveLb(1);});
-async function load(){try{const r=await fetch("./gallery-data.json");const d=await r.json();items=d.items?.length?d.items:fallback.items;}catch{items=fallback.items;}renderFilters();renderGrid();}
-load();
-const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add("is-visible");}),{threshold:.12});
-document.querySelectorAll(".reveal").forEach(el=>obs.observe(el));
-</script>
+  <div class="modal" id="imageModal">
+    <div class="modal-content">
+      <button class="modal-close" id="closeModal">×</button>
+      <img id="modalImage" src="" alt="">
+    </div>
+  </div>
+
+  <script>
+    const galleryGrid = document.getElementById('galleryGrid');
+    const imageModal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const closeModal = document.getElementById('closeModal');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    let allItems = [];
+    let currentFilter = 'all';
+
+    function renderGallery(items) {
+      galleryGrid.innerHTML = items.map(item => `
+        <article class="gallery-item" data-category="${item.category}">
+          <img src="${item.image}" alt="${item.title}">
+          <div class="info">
+            <h3>${item.title}</h3>
+            <p>${item.description || ''}</p>
+            <p>${item.location ? item.location + ' · ' : ''}${item.category}</p>
+          </div>
+        </article>
+      `).join('');
+
+      document.querySelectorAll('.gallery-item').forEach(card => {
+        card.addEventListener('click', () => {
+          const img = card.querySelector('img');
+          modalImage.src = img.src;
+          modalImage.alt = img.alt;
+          imageModal.classList.add('open');
+        });
+      });
+    }
+
+    function applyFilter(filter) {
+      currentFilter = filter;
+      filterButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.filter === filter));
+      const filtered = filter === 'all' ? allItems : allItems.filter(item => item.category === filter);
+      renderGallery(filtered);
+    }
+
+    fetch('./gallery-data.json')
+      .then(r => r.json())
+      .then(data => {
+        allItems = Array.isArray(data.items) ? data.items : [];
+        applyFilter(currentFilter);
+      })
+      .catch(() => {
+        allItems = [
+          { title:'Ventanas PVC interior', category:'ventanas', image:'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/4f4b2ab93158181304e7509fe92a55b05f551142.jpg', description:'Proyecto residencial con ventanales de gran formato.', location:'Santiago' },
+          { title:'Puerta PVC moderna', category:'puertas', image:'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/73245052e0bea4511a763f0f74c230e61eab04a3.jpg', description:'Puerta con panel vidriado y diseño contemporáneo.', location:'Las Condes' },
+          { title:'Cortinas de cristal', category:'cortinas', image:'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/00b10446d7cbf17b9c453b8ccf016fa88be40c86.jpg', description:'Cierre de terraza con cortina transparente.', location:'Providencia' },
+          { title:'Sala con termopanel', category:'termopanel', image:'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/1f4aed3c43bb1ce6f9f60c667ac588da07f52982.jpg', description:'Mayor confort térmico y acústico.', location:'Vitacura' },
+          { title:'Terraza panorámica', category:'cortinas', image:'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/fafbdd837531111e5c3492552047700ce354f14f.jpg', description:'Solución panorámica en cristal para terraza.', location:'Ñuñoa' },
+          { title:'Instalación técnica', category:'instalacion', image:'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/b6d7955aca42b445c45898e99ab68800660dd09f.jpg', description:'Montaje en obra con equipo especializado.', location:'Santiago' }
+        ];
+        applyFilter(currentFilter);
+      });
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => applyFilter(btn.dataset.filter));
+    });
+
+    closeModal.addEventListener('click', () => imageModal.classList.remove('open'));
+    imageModal.addEventListener('click', e => {
+      if (e.target === imageModal) imageModal.classList.remove('open');
+    });
+  </script>
+
 </body>
 </html>
