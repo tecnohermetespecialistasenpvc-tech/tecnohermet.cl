@@ -122,7 +122,7 @@
         <a href="#inicio">Inicio</a>
         <a href="#empresa">Empresa</a>
         <a href="#soluciones">Soluciones</a>
-        <!--<a href="#servicios">Servicios</a>-->
+        <a href="#servicios">Servicios</a>
         <a href="#galeria">Galería</a>
         <a href="#contacto">Contacto</a>
       </nav>
@@ -184,7 +184,7 @@
   </section>
 
   <!-- SERVICIOS -->
-  <!--<section class="content container" id="servicios">
+  <section class="content container" id="servicios">
     <h2 class="section-title">Servicios</h2>
     <p class="section-subtitle">Trabajos para proyectos residenciales y comerciales, con fabricación e instalación a medida.</p>
     <div class="services-grid">
@@ -193,7 +193,7 @@
       <article class="service-card"><h3>Termopanel</h3><p>Mayor aislamiento térmico y acústico para viviendas y oficinas.</p></article>
       <article class="service-card"><h3>Cerramientos</h3><p>Cortinas de cristal, barandas y cierres para terrazas y espacios exteriores.</p></article>
     </div>
-  </section>-->
+  </section>
 
   <!-- GALERÍA -->
   <section class="content container" id="galeria">
@@ -260,138 +260,55 @@
   </div>
 
   <script>
-    let mediaData = [];
-    const galleryGrid = document.getElementById('galleryGrid');
-    const mediaModal  = document.getElementById('mediaModal');
-    const modalBody   = document.getElementById('modalBody');
-    const closeBtn    = document.getElementById('closeModal');
-    let currentFilter = 'all';
-
-    function getItems(){
-      return currentFilter === 'all' ? mediaData : mediaData.filter(i => i.category === currentFilter);
+    const fallbackItems = [
+      { title: 'Puerta termopanel', category: 'puertas', image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80', description: 'Instalación de puertas PVC.', location: 'puertas' },
+      { title: 'Ventana Concepcion', category: 'ventanas', image: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80', description: 'Instalación de ventanas PVC en Concepción.', location: 'Concepción · ventanas' },
+      { title: 'Ventana Santiago', category: 'ventanas', image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80', description: 'Instalación de ventanas PVC en Santiago.', location: 'Santiago · ventanas' },
+      { title: 'Ventanas PVC interior', category: 'ventanas', image: 'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80', description: 'Proyecto residencial con ventanales de gran formato.', location: 'Santiago · ventanas' },
+      { title: 'Puerta PVC moderna', category: 'puertas', image: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1200&q=80', description: 'Puerta con panel vidriado y diseño contemporáneo.', location: 'Las Condes · puertas' },
+      { title: 'Cortinas de cristal', category: 'cortinas', image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80', description: 'Cierre de terraza con cortina transparente.', location: 'Providencia · cortinas' },
+      { title: 'Termopanel Living', category: 'termopanel', image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80', description: 'Mayor confort térmico y acústico.', location: 'Vitacura · termopanel' },
+      { title: 'Terraza panorámica', category: 'cortinas', image: 'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=1200&q=80', description: 'Solución panorámica en cristal.', location: 'Ñuñoa · cortinas' },
+      { title: 'Instalación técnica', category: 'instalacion', image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80', description: 'Montaje en obra con equipo especializado.', location: 'Santiago · instalación' }
+    ];
+    let items = [];
+    let filtered = [];
+    let idx = 0;
+    let currentCat = 'todos';
+    const grid = document.getElementById('galleryGrid');
+    const filters = document.getElementById('galleryFilters');
+    const empty = document.getElementById('galleryEmpty');
+    const lb = document.getElementById('lightbox');
+    function renderFilters() {
+      const cats = ['todos', ...new Set(items.map(i => i.category))];
+      filters.innerHTML = cats.map(c => `<button class="filter-btn ${c === currentCat ? 'active' : ''}" data-c="${c}">${c}</button>`).join('');
+      filters.querySelectorAll('.filter-btn').forEach(b => b.addEventListener('click', () => { currentCat = b.dataset.c; renderFilters(); renderGrid(); }));
     }
-
-    function render(){
-      const items = getItems().slice(0, 9);
-      galleryGrid.innerHTML = items.map(item => {
-        const media = item.type === 'video'
-          ? `<video muted playsinline preload="metadata" poster="${item.thumb||''}"><source src="${item.src}" type="video/mp4"></video>`
-          : `<img src="${item.src}" alt="${item.title}" loading="lazy">`;
-        const badge = item.type === 'video'
-          ? `<span class="type-badge video">▶ video</span>`
-          : `<span class="type-badge">${item.category}</span>`;
-        return `
-          <article class="gallery-card"
-            data-type="${item.type}"
-            data-src="${item.src}"
-            data-title="${item.title}">
-            ${media}
-            <div class="info">
-              <h3>${item.title}</h3>
-              <p>${item.desc || item.description || ''}</p>
-              ${badge}
-            </div>
-          </article>`;
-      }).join('');
-
-      document.querySelectorAll('.gallery-card').forEach(card => {
-        card.addEventListener('click', () => {
-          const type  = card.dataset.type;
-          const src   = card.dataset.src;
-          const title = card.dataset.title;
-          if(type === 'video'){
-            modalBody.innerHTML = `<video controls autoplay style="width:100%;max-height:85vh;background:#000"><source src="${src}" type="video/mp4"></video>`;
-          } else {
-            modalBody.innerHTML = `<img src="${src}" alt="${title}" style="width:100%;max-height:85vh;object-fit:contain">`;
-          }
-          mediaModal.classList.add('open');
-        });
-      });
+    function renderGrid() {
+      filtered = currentCat === 'todos' ? items : items.filter(i => i.category === currentCat);
+      grid.innerHTML = filtered.map((i, n) => `<div class="gallery-card"><img src="${i.image}" alt="${i.title}" data-n="${n}" loading="lazy"><div class="gallery-copy"><h3>${i.title}</h3><p>${i.description}</p><small>${i.location}</small></div></div>`).join('');
+      empty.hidden = filtered.length !== 0;
+      grid.querySelectorAll('img').forEach(img => img.addEventListener('click', openLb));
     }
-
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        currentFilter = btn.dataset.filter;
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b === btn));
-        render();
-      });
-    });
-
-    closeBtn.addEventListener('click', () => mediaModal.classList.remove('open'));
-    mediaModal.addEventListener('click', e => { if(e.target === mediaModal) mediaModal.classList.remove('open'); });
-
-    fetch('./gallery-data.json')
-      .then(r => r.json())
-      .then(data => {
-        mediaData = Array.isArray(data.items) ? data.items : [];
-        render();
-      })
-      .catch(() => {
-        mediaData = [];
-        render();
-      });
-    const galleryGrid = document.getElementById('galleryGrid');
-    const mediaModal  = document.getElementById('mediaModal');
-    const modalBody   = document.getElementById('modalBody');
-    const closeBtn    = document.getElementById('closeModal');
-    let currentFilter = 'all';
-
-    function getItems(){
-      return currentFilter === 'all'
-        ? mediaData
-        : mediaData.filter(i => i.category === currentFilter);
+    function openLb(e) {
+      idx = Number(e.target.dataset.n);
+      document.getElementById('lbImg').src = filtered[idx].image;
+      document.getElementById('lbImg').alt = filtered[idx].title;
+      document.getElementById('lbTitle').textContent = filtered[idx].title;
+      document.getElementById('lbDesc').textContent = filtered[idx].description;
+      lb.classList.add('open');
     }
-
-    function render(){
-      const items = getItems().slice(0, 9);
-      galleryGrid.innerHTML = items.map(item => {
-        const media = item.type === 'video'
-          ? `<video muted playsinline preload="metadata" poster="${item.thumb||''}"><source src="${item.src}" type="video/mp4"></video>`
-          : `<img src="${item.src}" alt="${item.title}" loading="lazy">`;
-        const badge = item.type === 'video'
-          ? `<span class="type-badge video">▶ video</span>`
-          : `<span class="type-badge">${item.category}</span>`;
-        return `
-          <article class="gallery-card"
-            data-type="${item.type}"
-            data-src="${item.src}"
-            data-title="${item.title}">
-            ${media}
-            <div class="info">
-              <h3>${item.title}</h3>
-              <p>${item.desc}</p>
-              ${badge}
-            </div>
-          </article>`;
-      }).join('');
-
-      document.querySelectorAll('.gallery-card').forEach(card => {
-        card.addEventListener('click', () => {
-          const type  = card.dataset.type;
-          const src   = card.dataset.src;
-          const title = card.dataset.title;
-          if(type === 'video'){
-            modalBody.innerHTML = `<video controls autoplay style="width:100%;max-height:85vh;background:#000"><source src="${src}" type="video/mp4"></video>`;
-          } else {
-            modalBody.innerHTML = `<img src="${src}" alt="${title}" style="width:100%;max-height:85vh;object-fit:contain">`;
-          }
-          mediaModal.classList.add('open');
-        });
-      });
-    }
-
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        currentFilter = btn.dataset.filter;
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b === btn));
-        render();
-      });
-    });
-
-    closeBtn.addEventListener('click', () => mediaModal.classList.remove('open'));
-    mediaModal.addEventListener('click', e => { if(e.target === mediaModal) mediaModal.classList.remove('open'); });
-
-    render();
+    function closeLb(){ lb.classList.remove('open'); }
+    function moveLb(s){ idx = (idx + s + filtered.length) % filtered.length; openLb({ target: { dataset: { n: idx } } }); }
+    document.getElementById('lbClose').onclick = closeLb;
+    document.getElementById('lbPrev').onclick = () => moveLb(-1);
+    document.getElementById('lbNext').onclick = () => moveLb(1);
+    lb.addEventListener('click', e => { if(e.target === lb) closeLb(); });
+    document.addEventListener('keydown', e => { if(!lb.classList.contains('open')) return; if(e.key === 'Escape') closeLb(); if(e.key === 'ArrowLeft') moveLb(-1); if(e.key === 'ArrowRight') moveLb(1); });
+    async function load() { try { const r = await fetch('./gallery-data.json'); const d = await r.json(); items = d.items?.length ? d.items : fallbackItems; } catch { items = fallbackItems; } renderFilters(); renderGrid(); }
+    load();
+    const obs = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && e.target.classList.add('is-visible')), { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
   </script>
 </body>
 </htmlmediaData=[{type:'image',category:'ventanas',src:'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/4f4b2ab93158181304e7509fe92a55b05f551142.jpg',title:'Ventana PVC interior',desc:'Proyecto residencial con ventanales de gran formato.'},{type:'image',category:'puertas',src:'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/73245052e0bea4511a763f0f74c230e61eab04a3.jpg',title:'Puerta PVC moderna',desc:'Puerta con panel vidriado y diseño contemporáneo.'},{type:'image',category:'cortinas',src:'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/00b10446d7cbf17b9c453b8ccf016fa88be40c86.jpg',title:'Cortinas de cristal',desc:'Cierre de terraza con cortina transparente.'},{type:'image',category:'termopanel',src:'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/1f4aed3c43bb1ce6f9f60c667ac588da07f52982.jpg',title:'Sala con termopanel',desc:'Mayor confort térmico y acústico.'},{type:'image',category:'cortinas',src:'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/fafbdd837531111e5c3492552047700ce354f14f.jpg',title:'Terraza panorámica',desc:'Solución panorámica en cristal para terraza.'},{type:'image',category:'instalacion',src:'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/b6d7955aca42b445c45898e99ab68800660dd09f.jpg',title:'Instalación técnica',desc:'Montaje en obra con equipo especializado.'},{type:'video',category:'general',src:'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',thumb:'https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217',title:'Video de trabajo',desc:'Proceso de instalación de ventana PVC.'},{type:'image',category:'ventanas',src:'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/7c04fdab7f8c3f49a75b9e17b9e1e31d4d6a55c9.jpg',title:'Ventana corredera',desc:'Solución de apertura eficiente y limpia.'},{type:'image',category:'puertas',src:'https://pplx-res.cloudinary.com/image/upload/pplx_search_images/ae3f4d0a4f9d4ffcb1f7d1d0e8f1bc01ccf4f9cb.jpg',title:'Puerta PVC exterior',desc:'Acceso con alta resistencia y terminación moderna.'}];render();html>
@@ -1626,3 +1543,5 @@
   </script>
 </body>
 </html>
+
+            
