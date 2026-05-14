@@ -1,3 +1,6 @@
+
+
+            
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -88,8 +91,18 @@
   <section class="content container" id="contacto">
     <h2 class="section-title">Contacto</h2>
     <div class="contact-box">
-      <div><strong>WhatsApp:</strong> <a href="https://wa.me/56975722123" target="_blank">+56 9 7572 2123</a><br><strong>Correo:</strong> <a href="mailto:tecnohermetespecialistasenpvc@gmail.com">tecnohermetespecialistasenpvc@gmail.com</a><br><strong>Ubicación:</strong> Boca Sur San Pedro de la Paz, Concepción Chile<br><strong>Horario:</strong> Lunes a viernes - 8:00-22.00</div>
-      <div><a class="btn btn-primary" href="https://wa.me/56977105324?text=Hola%20TECNO%20HERMET,%20quiero%20cotizar." target="_blank">Cotizar ahora</a></div>
+      <div>
+        <strong>WhatsApp:</strong> <a href="https://wa.me/56975722123" target="_blank">+56 9 7572 2123</a><br>
+        <strong>Correo:</strong> <a href="mailto:tecnohermetespecialistasenpvc@gmail.com">tecnohermetespecialistasenpvc@gmail.com</a><br>
+        <strong>Ubicación:</strong> Boca Sur San Pedro de la Paz, Concepción Chile<br>
+        <strong>Horario:</strong> Lunes a viernes - 8:00-22.00
+      </div>
+      <form style="display:grid;gap:.8rem" action="https://wa.me/56977105324" target="_blank">
+        <input type="text" placeholder="Tu nombre" style="padding:12px 14px;border:1px solid #d9e2ef;border-radius:12px">
+        <input type="text" placeholder="Teléfono" style="padding:12px 14px;border:1px solid #d9e2ef;border-radius:12px">
+        <textarea placeholder="Cuéntanos tu proyecto" rows="5" style="padding:12px 14px;border:1px solid #d9e2ef;border-radius:12px;resize:vertical;text-align:justify;text-justify:inter-word"></textarea>
+        <button class="btn btn-primary" type="submit">Enviar mensaje</button>
+      </form>
     </div>
   </section>
 
@@ -108,7 +121,7 @@
       { title:'Terraza panorámica', category:'cortinas', image:'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80', description:'Solución panorámica en cristal.', location:'Ñuñoa · cortinas' },
       { title:'Instalación técnica', category:'instalacion', image:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80', description:'Montaje en obra con equipo especializado.', location:'Santiago · instalación' }
     ];
-    let items = fallbackItems;
+    let items = [...fallbackItems];
     let currentCat = 'todos';
     let filtered = items.slice();
     let idx = 0;
@@ -118,26 +131,19 @@
     const lbImg = document.getElementById('lbImg');
     const lbTitle = document.getElementById('lbTitle');
     const lbDesc = document.getElementById('lbDesc');
-
-    function renderFilters(){
-      const cats = ['todos', ...new Set(items.map(i => i.category))];
-      filters.innerHTML = cats.map(c => `<button class="filter-btn ${c===currentCat?'active':''}" data-c="${c}">${c}</button>`).join('');
-      filters.querySelectorAll('.filter-btn').forEach(b => b.addEventListener('click', () => { currentCat = b.dataset.c; renderFilters(); renderGrid(); }));
-    }
-    function renderGrid(){
-      filtered = currentCat === 'todos' ? items : items.filter(i => i.category === currentCat);
-      grid.innerHTML = filtered.map((i,n) => `<article class="gallery-card"><img src="${i.image}" alt="${i.title}" data-n="${n}" loading="lazy"><div class="gallery-copy"><h3>${i.title}</h3><p>${i.description}</p><small>${i.location}</small></div></article>`).join('');
-      grid.querySelectorAll('img').forEach(img => img.addEventListener('click', openLb));
-    }
+    const toAbs = s => new URL(s, location.href).href;
+    const getFileName = p => (p.split('/').pop() || '').toLowerCase();
+    const isImage = f => /\.(jpg|jpeg|png|webp|gif)$/i.test(f);
+    const detectCat = f => { const n = f.toLowerCase(); if(n.includes('ventana')) return 'ventanas'; if(n.includes('puerta')) return 'puertas'; if(n.includes('cortina')) return 'cortinas'; if(n.includes('termopanel')) return 'termopanel'; if(n.includes('instal')) return 'instalacion'; return 'general'; };
+    const titleize = s => s.replace(/[-_]/g,' ').replace(/\.[a-z0-9]+$/i,'').replace(/\d+/g,'').replace(/\s+/g,' ').trim().replace(/\w/g,m=>m.toUpperCase());
+    function renderFilters(){ const cats = ['todos', ...new Set(items.map(i => i.category))]; filters.innerHTML = cats.map(c => `<button class="filter-btn ${c===currentCat?'active':''}" data-c="${c}">${c}</button>`).join(''); filters.querySelectorAll('.filter-btn').forEach(b => b.addEventListener('click', () => { currentCat = b.dataset.c; renderFilters(); renderGrid(); })); }
+    function renderGrid(){ filtered = currentCat === 'todos' ? items : items.filter(i => i.category === currentCat); grid.innerHTML = filtered.map((i,n) => `<article class="gallery-card"><img src="${i.image}" alt="${i.title}" data-n="${n}" loading="lazy"><div class="gallery-copy"><h3>${i.title}</h3><p>${i.description}</p><small>${i.location}</small></div></article>`).join(''); grid.querySelectorAll('img').forEach(img => img.addEventListener('click', openLb)); }
     function openLb(e){ idx = Number(e.target.dataset.n); lbImg.src = filtered[idx].image; lbImg.alt = filtered[idx].title; lbTitle.textContent = filtered[idx].title; lbDesc.textContent = filtered[idx].description; lb.classList.add('open'); }
     function closeLb(){ lb.classList.remove('open'); }
     function moveLb(step){ idx = (idx + step + filtered.length) % filtered.length; lbImg.src = filtered[idx].image; lbImg.alt = filtered[idx].title; lbTitle.textContent = filtered[idx].title; lbDesc.textContent = filtered[idx].description; }
-    document.getElementById('lbClose').onclick = closeLb;
-    lb.addEventListener('click', e => { if(e.target === lb) closeLb(); });
-    document.addEventListener('keydown', e => { if(!lb.classList.contains('open')) return; if(e.key === 'Escape') closeLb(); if(e.key === 'ArrowLeft') moveLb(-1); if(e.key === 'ArrowRight') moveLb(1); });
-    renderFilters(); renderGrid();
+    document.getElementById('lbClose').onclick = closeLb; lb.addEventListener('click', e => { if(e.target === lb) closeLb(); }); document.addEventListener('keydown', e => { if(!lb.classList.contains('open')) return; if(e.key === 'Escape') closeLb(); if(e.key === 'ArrowLeft') moveLb(-1); if(e.key === 'ArrowRight') moveLb(1); });
+    async function loadGallery(){ try { const dirSets = [['./assets/trabajos/ventanas/'], ['./assets/trabajos/puertas/'], ['./assets/trabajos/cortinas/'], ['./assets/trabajos/termopanel/'], ['./assets/trabajos/instalacion/'], ['./assets/trabajos/general/']]; const found = []; for(const [dir] of dirSets){ try { const r = await fetch(dir); const t = await r.text(); const matches = [...t.matchAll(/href="([^"]+\.(?:jpg|jpeg|png|webp|gif|mp4))"/ig)].map(m => m[1]).filter(f => !f.startsWith('../') && !f.endsWith('/')); const cat = detectCat(dir); matches.forEach(f => found.push({ title:titleize(getFileName(f)), category:cat, image:dir + f, description:`${cat} · ${titleize(getFileName(f))}`, location:cat })); } catch {} } if(found.length) items = found; } catch {} renderFilters(); renderGrid(); }
+    loadGallery();
   </script>
 </body>
 </html>
-
-            
