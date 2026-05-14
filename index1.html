@@ -109,19 +109,21 @@
 
   <div class="modal" id="lightbox"><div class="modal-inner"><button class="modal-close" id="lbClose" type="button">×</button><img id="lbImg" src="" alt=""><div style="padding:1rem"><strong id="lbTitle"></strong><p id="lbDesc" style="margin:.35rem 0 0;color:#5f6b7a"></p></div></div></div>
   <a class="wa-float" href="https://wa.me/56977105324?text=Hola%20TECNO%20HERMET,%20quiero%20cotizar." target="_blank" aria-label="WhatsApp">WA</a>
-
-  <script>
+<script>
     const fallbackItems = [
-      { title:'Puerta termopanel', category:'puertas', image:'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80', description:'Instalación de puertas PVC.', location:'Puertas' },
-      { title:'Ventana Concepción', category:'ventanas', image:'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80', description:'Instalación de ventanas PVC en Concepción.', location:'Concepción · ventanas' },
-      { title:'Ventana Santiago', category:'ventanas', image:'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80', description:'Instalación de ventanas PVC en Santiago.', location:'Santiago · ventanas' },
-      { title:'Ventanas PVC interior', category:'ventanas', image:'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80', description:'Proyecto residencial con ventanales de gran formato.', location:'Santiago · ventanas' },
-      { title:'Puerta PVC moderna', category:'puertas', image:'https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1200&q=80', description:'Puerta con panel vidriado y diseño contemporáneo.', location:'Las Condes · puertas' },
-      { title:'Cortinas de cristal', category:'cortinas', image:'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=1200&q=80', description:'Cierre de terraza con cortina transparente.', location:'Providencia · cortinas' },
-      { title:'Termopanel Living', category:'termopanel', image:'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80', description:'Mayor confort térmico y acústico.', location:'Vitacura · termopanel' },
-      { title:'Terraza panorámica', category:'cortinas', image:'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80', description:'Solución panorámica en cristal.', location:'Ñuñoa · cortinas' },
-      { title:'Instalación técnica', category:'instalacion', image:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80', description:'Montaje en obra con equipo especializado.', location:'Santiago · instalación' }
+      { title:'Ventana PVC blanca', category:'ventanas', image:'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80', description:'Fabricación e instalación de ventanas PVC.', location:'Ventanas PVC' },
+      { title:'Ventana corredera PVC', category:'ventanas', image:'https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80', description:'Sistema corredero de alto rendimiento.', location:'Ventanas PVC' },
+      { title:'Puerta PVC moderna', category:'puertas', image:'https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1200&q=80', description:'Puerta de PVC con terminación moderna.', location:'Puertas PVC' },
+      { title:'Puerta de acceso PVC', category:'puertas', image:'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80', description:'Acceso seguro y aislado.', location:'Puertas PVC' },
+      { title:'Cortina de cristal', category:'cortinas', image:'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=1200&q=80', description:'Cierre de terraza con cortina de cristal.', location:'Cortinas de cristal' },
+      { title:'Cierre panorámico', category:'cortinas', image:'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80', description:'Solución panorámica para terrazas.', location:'Cortinas de cristal' },
+      { title:'Ventana termopanel', category:'termopanel', image:'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80', description:'Mayor aislación térmica y acústica.', location:'Termopanel' },
+      { title:'Termopanel residencial', category:'termopanel', image:'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80', description:'Solución eficiente para viviendas.', location:'Termopanel' },
+      { title:'Instalación de ventana', category:'instalacion', image:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80', description:'Proceso de instalación en terreno.', location:'Instalación PVC' },
+      { title:'Instalación de puertas', category:'instalacion', image:'https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=1200&q=80', description:'Montaje técnico de puertas PVC.', location:'Instalación PVC' },
+      { title:'Trabajo general PVC', category:'general', image:'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80', description:'Trabajos de fabricación e instalación PVC.', location:'General' }
     ];
+
     let items = [...fallbackItems];
     let currentCat = 'todos';
     let filtered = items.slice();
@@ -133,18 +135,55 @@
     const lbTitle = document.getElementById('lbTitle');
     const lbDesc = document.getElementById('lbDesc');
     const toAbs = s => new URL(s, location.href).href;
-    const getFileName = p => (p.split('/').pop() || '').toLowerCase();
-    const isImage = f => /\.(jpg|jpeg|png|webp|gif)$/i.test(f);
-    const detectCat = f => { const n = f.toLowerCase(); if(n.includes('ventana')) return 'ventanas'; if(n.includes('puerta')) return 'puertas'; if(n.includes('cortina')) return 'cortinas'; if(n.includes('termopanel')) return 'termopanel'; if(n.includes('instal')) return 'instalacion'; return 'general'; };
-    const titleize = s => s.replace(/[-_]/g,' ').replace(/\.[a-z0-9]+$/i,'').replace(/\d+/g,'').replace(/\s+/g,' ').trim().replace(/\w/g,m=>m.toUpperCase());
-    function renderFilters(){ const cats = ['todos', ...new Set(items.map(i => i.category))]; filters.innerHTML = cats.map(c => `<button class="filter-btn ${c===currentCat?'active':''}" data-c="${c}">${c}</button>`).join(''); filters.querySelectorAll('.filter-btn').forEach(b => b.addEventListener('click', () => { currentCat = b.dataset.c; renderFilters(); renderGrid(); })); }
-    function renderGrid(){ filtered = currentCat === 'todos' ? items : items.filter(i => i.category === currentCat); grid.innerHTML = filtered.map((i,n) => `<article class="gallery-card"><img src="${i.image}" alt="${i.title}" data-n="${n}" loading="lazy"><div class="gallery-copy"><h3>${i.title}</h3><p>${i.description}</p><small>${i.location}</small></div></article>`).join(''); grid.querySelectorAll('img').forEach(img => img.addEventListener('click', openLb)); }
+    const imgExt = /\.(jpg|jpeg|png|webp|gif)$/i;
+    const catFromName = name => { const n = name.toLowerCase(); if (n.includes('ventan')) return 'ventanas'; if (n.includes('puert')) return 'puertas'; if (n.includes('cortin')) return 'cortinas'; if (n.includes('termopanel')) return 'termopanel'; if (n.includes('instal')) return 'instalacion'; return 'general'; };
+    const titleFromName = name => name.replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' ').replace(/\d+/g, ' ').replace(/\s+/g, ' ').trim().replace(/\w/g, m => m.toUpperCase());
+
+    function renderFilters(){
+      const cats = ['todos', ...new Set(items.map(i => i.category))];
+      filters.innerHTML = cats.map(c => `<button class="filter-btn ${c===currentCat?'active':''}" data-c="${c}">${c}</button>`).join('');
+      filters.querySelectorAll('.filter-btn').forEach(b => b.addEventListener('click', () => { currentCat = b.dataset.c; renderFilters(); renderGrid(); }));
+    }
+    function renderGrid(){
+      filtered = currentCat === 'todos' ? items : items.filter(i => i.category === currentCat);
+      grid.innerHTML = filtered.map((i,n) => `<article class="gallery-card"><img src="${i.image}" alt="${i.title}" data-n="${n}" loading="lazy"><div class="gallery-copy"><h3>${i.title}</h3><p>${i.description}</p><small>${i.location}</small></div></article>`).join('');
+      grid.querySelectorAll('img').forEach(img => img.addEventListener('click', openLb));
+    }
     function openLb(e){ idx = Number(e.target.dataset.n); lbImg.src = filtered[idx].image; lbImg.alt = filtered[idx].title; lbTitle.textContent = filtered[idx].title; lbDesc.textContent = filtered[idx].description; lb.classList.add('open'); }
     function closeLb(){ lb.classList.remove('open'); }
     function moveLb(step){ idx = (idx + step + filtered.length) % filtered.length; lbImg.src = filtered[idx].image; lbImg.alt = filtered[idx].title; lbTitle.textContent = filtered[idx].title; lbDesc.textContent = filtered[idx].description; }
-    document.getElementById('lbClose').onclick = closeLb; lb.addEventListener('click', e => { if(e.target === lb) closeLb(); }); document.addEventListener('keydown', e => { if(!lb.classList.contains('open')) return; if(e.key === 'Escape') closeLb(); if(e.key === 'ArrowLeft') moveLb(-1); if(e.key === 'ArrowRight') moveLb(1); });
-    async function loadGallery(){ try { const dirSets = [['./assets/trabajos/ventanas/'], ['./assets/trabajos/puertas/'], ['./assets/trabajos/cortinas/'], ['./assets/trabajos/termopanel/'], ['./assets/trabajos/instalacion/'], ['./assets/trabajos/general/']]; const found = []; for(const [dir] of dirSets){ try { const r = await fetch(dir); const t = await r.text(); const matches = [...t.matchAll(/href="([^"]+\.(?:jpg|jpeg|png|webp|gif|mp4))"/ig)].map(m => m[1]).filter(f => !f.startsWith('../') && !f.endsWith('/')); const cat = detectCat(dir); matches.forEach(f => found.push({ title:titleize(getFileName(f)), category:cat, image:dir + f, description:`${cat} · ${titleize(getFileName(f))}`, location:cat })); } catch {} } if(found.length) items = found; } catch {} renderFilters(); renderGrid(); }
+    document.getElementById('lbClose').onclick = closeLb;
+    lb.addEventListener('click', e => { if(e.target === lb) closeLb(); });
+    document.addEventListener('keydown', e => { if(!lb.classList.contains('open')) return; if(e.key === 'Escape') closeLb(); if(e.key === 'ArrowLeft') moveLb(-1); if(e.key === 'ArrowRight') moveLb(1); });
+
+    async function scanFolder(folder, cat){
+      const found = [];
+      try {
+        const r = await fetch(folder);
+        const text = await r.text();
+        const doc = new DOMParser().parseFromString(text, 'text/html');
+        [...doc.querySelectorAll('a')].forEach(a => {
+          const href = a.getAttribute('href') || '';
+          if (imgExt.test(href)) found.push({ title:titleFromName(href), category:cat, image: folder + href, description:`${cat} · ${titleFromName(href)}`, location:cat });
+        });
+      } catch {}
+      return found;
+    }
+
+    async function loadGallery(){
+      const folders = ['ventanas','puertas','cortinas','termopanel','instalacion','general'];
+      const results = [];
+      for (const cat of folders) {
+        const folder = `./assets/trabajos/${cat}/`;
+        const found = await scanFolder(folder, cat);
+        if (found.length) results.push(...found);
+      }
+      if (results.length) items = results;
+      renderFilters();
+      renderGrid();
+    }
+
     loadGallery();
   </script>
-</body>
+  </body>
 </html>
