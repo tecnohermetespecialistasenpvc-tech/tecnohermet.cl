@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel Galería - TECNO HERMET</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;margin:0;background:#f5f7fb;color:#152238}
+    .wrap{max-width:980px;margin:0 auto;padding:24px}
+    .card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 8px 24px rgba(0,0,0,.08);margin-bottom:18px}
+    h1{margin:0 0 12px} label{display:block;font-weight:700;margin:10px 0 6px}
+    input,select,textarea,button{width:100%;padding:12px 14px;border:1px solid #d9e2ef;border-radius:12px;font:inherit;box-sizing:border-box}
+    textarea{min-height:110px;resize:vertical}
+    button{background:#13235d;color:#fff;border:none;font-weight:700;cursor:pointer;margin-top:12px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    pre{white-space:pre-wrap;word-break:break-word;background:#0f172a;color:#e2e8f0;padding:16px;border-radius:12px;overflow:auto}
+    .note{color:#5f6b7a;line-height:1.5}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Panel de galerías</h1>
+    <p class="note">Sube una imagen, elige categoría, escribe descripción y prioridad. El panel te genera la entrada para <code>gallery-data.json</code>.</p>
+    <div class="card">
+      <label>Imagen</label>
+      <input id="img" type="file" accept="image/*" />
+      <div class="grid">
+        <div>
+          <label>Título</label>
+          <input id="title" type="text" placeholder="Ej: Ventana PVC blanca" />
+        </div>
+        <div>
+          <label>Categoría</label>
+          <select id="cat">
+            <option>ventanas</option>
+            <option>puertas</option>
+            <option>cortinas</option>
+            <option>termopanel</option>
+            <option>instalacion</option>
+            <option>general</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid">
+        <div>
+          <label>Prioridad</label>
+          <input id="priority" type="number" value="1" min="1" />
+        </div>
+        <div>
+          <label>Ubicación</label>
+          <input id="location" type="text" placeholder="Ej: Ventanas PVC" />
+        </div>
+      </div>
+      <label>Descripción</label>
+      <textarea id="desc" placeholder="Describe el trabajo"></textarea>
+      <button id="gen">Generar JSON</button>
+    </div>
+    <div class="card">
+      <label>Salida</label>
+      <pre id="out">Esperando datos...</pre>
+    <div id="preview" style="margin-top:12px"></div>
+    </div>
+  </div>
+  <script>
+    const img = document.getElementById('img');
+    const title = document.getElementById('title');
+    const cat = document.getElementById('cat');
+    const priority = document.getElementById('priority');
+    const location = document.getElementById('location');
+    const desc = document.getElementById('desc');
+    const out = document.getElementById('out');
+    const preview = document.getElementById('preview');
+
+    document.getElementById('gen').addEventListener('click', () => {
+      try {
+        if (!img.files[0]) { out.textContent = 'Selecciona una imagen primero.'; return; }
+        const file = img.files[0];
+        const filename = file.name;
+        const path = `./assets/trabajos/${cat.value}/${filename}`;
+        const item = {
+          id: Date.now(),
+          title: title.value || filename.replace(/\.[^.]+$/, ''),
+          category: cat.value,
+          priority: Number(priority.value || 1),
+          image: path,
+          description: desc.value || '',
+          location: location.value || cat.value
+        };
+        out.textContent = JSON.stringify({ items: [item] }, null, 2);
+        const url = URL.createObjectURL(file);
+        preview.innerHTML = '<div style="margin-top:10px;padding:12px;border:1px solid #d9e2ef;border-radius:12px;background:#f8fbff"><strong>Vista previa</strong><br><img src="' + url + '" style="max-width:260px;border-radius:10px;margin-top:8px"><p style="margin:8px 0 0;color:#5f6b7a">' + item.title + ' · ' + item.category + ' · prioridad ' + item.priority + '</p></div>';
+      } catch (e) {
+        out.textContent = 'Error al generar JSON: ' + e.message;
+      }
+    });
+  </script>
+</body>
+</html>
