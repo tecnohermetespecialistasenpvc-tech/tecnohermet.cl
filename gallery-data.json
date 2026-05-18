@@ -15,6 +15,13 @@
       "location": "Concepción"
     },
     {
+      "title": "Ventanas Termopanel",
+      "category": "ventanas",
+      "image": "./assets/trabajos/ventanas/Ventanas_termopanel.jpeg",
+      "description": "Instalación de ventanas PVC.",
+      "location": ""
+    },
+    {
       "title": "Ventana Santiago",
       "category": "ventanas",
       "image": "./assets/trabajos/ventanas/ventana_santiago.jpeg",
